@@ -28,3 +28,8 @@ def class_page(request):
    display_classes = classes.display_classes(class1, class2, class3, class4, class5, class6)
 
    return render(request, 'ez_main/class_page.html', {'display_classes': display_classes})
+
+@login_required
+def books_page(request):
+   """ Return the users needed books page """
+   return render(request, 'ez_main/books_page.html')

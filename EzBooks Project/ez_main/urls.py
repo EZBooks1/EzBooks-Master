@@ -17,4 +17,7 @@ urlpatterns = [
 
    # Class page path
    path('class/', views.class_page, name='class_page'),
+
+   # Book page path
+   path('books/', views.books_page, name='books_page'),
 ]
