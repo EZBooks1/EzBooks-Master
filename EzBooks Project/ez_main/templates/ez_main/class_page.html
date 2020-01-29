@@ -6,34 +6,34 @@
 
 <!-- Bootstrap modal box for the class schedule -->
 <div class="modal-dialog text-center">
-    <div class= "main-section">
-        <div class="modal-content">
-            <h4>Class Schedule for {{user.username}}</h4>
-            <p>Your major is: &nbsp; {{user.major}}</p>
-            <br />
-        </div>
-    </div>
+   <div class= "main-section">
+      <div class="modal-content">
+         <h4>Class Schedule for {{user.username}}</h4>
+         <p>Your major is: &nbsp; {{user.major}}</p>
+         <br />
+      </div>
+   </div>
 </div>
 
 <div class="modal-dialog">
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                <th class="text-white bg-dark" scope="col">Extension</th>
-                <th class="text-white bg-dark" scope="col">Class Name</th>
-                <th class="text-white bg-dark" scope="col">Credit Hrs</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for obj in display_classes %}
-            <tr class="table-success">
-                <td>{{obj.class_extension}}</td>
-                <td>{{obj.class_name}}</td>
-                <td id="credit">{{obj.credit}}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+   <table class="table">
+      <thead class="thead-dark">
+         <tr>
+            <th class="text-white bg-dark" scope="col">Extension</th>
+            <th class="text-white bg-dark" scope="col">Class Name</th>
+            <th class="text-white bg-dark" scope="col">Credit Hrs</th>
+         </tr>
+      </thead>
+      <tbody>
+         {% for obj in display_classes %}
+         <tr class="table-success">
+            <td>{{obj.class_extension}}</td>
+            <td>{{obj.class_name}}</td>
+            <td id="credit">{{obj.credit}}</td>
+         </tr>
+         {% endfor %}
+      </tbody>
+   </table>
 </div>
 
 {% endblock content %}

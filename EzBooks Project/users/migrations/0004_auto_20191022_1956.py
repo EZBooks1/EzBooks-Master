@@ -5,24 +5,29 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('users', '0003_auto_20191022_1901'),
-    ]
+   dependencies = 
+   [
+      ('users', '0003_auto_20191022_1901'),
+   ]
 
-    operations = [
-        migrations.AddField(
-            model_name='user_profile',
-            name='active',
-            field=models.BooleanField(default=True),
-        ),
-        migrations.AddField(
-            model_name='user_profile',
-            name='admin',
-            field=models.BooleanField(default=False),
-        ),
-        migrations.AddField(
-            model_name='user_profile',
-            name='staff',
-            field=models.BooleanField(default=False),
-        ),
-    ]
+   operations = 
+   [
+      migrations.AddField
+      (
+         model_name='user_profile',
+         name='active',
+         field=models.BooleanField(default=True),
+      ),
+      migrations.AddField
+      (
+         model_name='user_profile',
+         name='admin',
+         field=models.BooleanField(default=False),
+      ),
+      migrations.AddField
+      (
+         model_name='user_profile',
+         name='staff',
+         field=models.BooleanField(default=False),
+      ),
+   ]
