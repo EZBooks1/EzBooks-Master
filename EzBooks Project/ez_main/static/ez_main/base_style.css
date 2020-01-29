@@ -2,37 +2,44 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
 
 /* HTML styling */
-body {
-	font-family: 'Source Sans Pro Black', sans-serif;
+body 
+{
+   font-family: 'Source Sans Pro Black', sans-serif;
 	background: url(library.jpg) no-repeat center center fixed;
 	background-size: cover;
 }
 
 /* Bootstrap navbar overwrite styles */
-.navbar-nav {
-	padding-top: 5px;
+.navbar-nav 
+{
+   padding-top: 5px;
 	padding-bottom: 5px;
 }
 
-.bg-dark {
+.bg-dark 
+{
 	background-color: rgba(44, 62, 80, 0.9) !important;
 }
 
-.navbar-brand {
+.navbar-brand 
+{
 	font-size: 35px;
 	padding-left: 15px;
 }
 
-.navbar-dark .navbar-nav .nav-link {
+.navbar-dark .navbar-nav .nav-link 
+{
 	color: #dce5e0;
 }
 
-.navbar-dark .navbar-nav .nav-link:focus, .navbar-dark .navbar-nav .nav-link:hover {
+.navbar-dark .navbar-nav .nav-link:focus, .navbar-dark .navbar-nav .nav-link:hover 
+{
 	color: #dce5e0;
 }
 
 /* 3d button effect styles */
-.btn3d {
+.btn3d 
+{
 	position: relative;
 	top: -6px;
 	border: 0;
@@ -44,67 +51,80 @@ body {
 	color: #dce5e0;
 }
 
-.btn3d:hover {
+.btn3d:hover 
+{
 	color: #dce5e0;
 }
 
-#last {
+#last 
+{
 	margin-right: 40px;
 }
 
-.btn3d:active:focus, .btn3d:focus:hover, .btn3d:focus {
+.btn3d:active:focus, .btn3d:focus:hover, .btn3d:focus 
+{
 	-moz-outline-style: none;
 	outline-style: none;
 	outline: medium none;
 }
 
-.btn3d:active, .btn3d.active {
+.btn3d:active, .btn3d.active 
+{
 	top: 2px;
 	background-color: #1abc9c !important;
 }
 
-.btn3d.btn-primary {
+.btn3d.btn-primary 
+{
 	box-shadow: 0 0 0 1px #47c9af inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #12836d, 0 8px 8px 1px rgba(0, 0, 0, 0.5);
 	background-color: #1abc9c;
 }
 
-.btn3d.btn-primary:active, .btn3d.btn-primary.active {
+.btn3d.btn-primary:active, .btn3d.btn-primary.active 
+{
 	box-shadow: 0 0 0 1px #47c9af inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset, 0 1px 3px 1px rgba(0, 0, 0, 0.3);
 	background-color: #1abc9c;
 }
 
 /* Footer navbar styles */
-.content-wrap{
-    position: relative;
-    min-height: 100vh;
+.content-wrap
+{
+   position: relative;
+   min-height: 100vh;
 }
 
-.body-content {
-    padding-bottom:400px;
+.body-content 
+{
+   padding-bottom:400px;
 }
 
-footer {
-    background: rgba(44, 62, 80, 0.9);
-    color: #dce5e0;
+footer 
+{
+   background: rgba(44, 62, 80, 0.9);
+   color: #dce5e0;
 
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+   position: absolute;
+   bottom: 0;
+   width: 100%;
 }
 
-footer h5 {
-    text-decoration: underline;
+footer h5 
+{
+   text-decoration: underline;
 }
 
-footer a {
-    color: #dce5e0;
+footer a 
+{
+   color: #dce5e0;
 }
 
-footer a:hover {
-    color: #1abc9c;
+footer a:hover 
+{
+   color: #1abc9c;
 }
 
-.pt-3, .py-3 {
-    padding-top: 0px !important;
-    padding-bottom: 1px !important;
+.pt-3, .py-3 
+{
+   padding-top: 0px !important;
+   padding-bottom: 1px !important;
 }
