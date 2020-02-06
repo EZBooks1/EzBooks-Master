@@ -13,11 +13,11 @@
             <form method="post" action="{% url 'users:register' %}" class="form">
             {% csrf_token %}
             {{ form.as_p }}
-               <button name="submit" class="btn btn-primary btn3d" id="submit-btn">Register</button>
+               <button name="submit" class="btn btn-primary btn3d">Register</button>
 
                <div class="bottom-info">
                   <p>Already have an account?</p>
-                  <p><a href="{% url 'users:login' %}">Login here</a></p>
+                  <p><a class="btn btn-primary btn3d" href="{% url 'users:login' %}">Login here</a></p>
                </div>
 
                <input type="hidden" name="next" value="{% url 'ez_main:home_page' %}"/>

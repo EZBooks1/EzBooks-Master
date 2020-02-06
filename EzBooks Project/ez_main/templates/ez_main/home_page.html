@@ -13,41 +13,16 @@
    </p>
 </div>
 
-<div class="homepage-info">
-   <p>
-      &emsp;This website is intended to act as an additional tool for an
-      existing college class registration system, to simulate this,
-      we ask all users to select a major when they register for our website.
-      The major you choose will then be used to randomly generate a mock
-      class schedule for you. This mock schedule is a key element in order
-      to demonstrate the true functionality of our website.
-   </p>
-</div>
-
-<div class="homepage-info">
-   <p>
-      &emsp;After registering for our website, you will be shown your
-      generated schedule, and given the option to regenerate your schedule
-      if you wish. Once you confirm your schedule, you will be taken to the
-      book selection page. Each book on this page is gathered according to the
-      textbook needs of the classes in your schedule. Here you can choose to
-      remove any books which you may already own, or have chosen to purchase
-      elsewhere.
-   </p>
-</div>
-
-<div class="homepage-info">
-   <p>
-      &emsp;Once you finish choosing which textbooks to order, you will be
-      brought to the checkout page. On this page you will be given the
-      option to rent or buy both new or used textbooks. After choosing your
-      textbook purchasing preferences, you will be asked if you would like to
-      have your order either picked up or delivered. Once you confirm your order
-      you will move one to the payment process after that you are done!
-   </p>
-
-   <a class="btn btn-primary btn3d" id="home-btn" href="{% url 'users:register' %}">Get Started!</a>
-
+<!-- Modal containing homepage navigation links -->
+<div class="modal-dialog text-center">
+   <div class="col-sm-8 main-section home-modal">
+      <div class="modal-content">
+         <div class="col-12">
+            <a class="btn btn-primary btn3d home-btn" href="{% url 'users:register' %}">Get Started Now!</a>
+            <a class="btn btn-primary btn3d home-btn" href="{% url 'ez_main:about_page' %}">Get Started With Some Help!</a>
+         </div>
+      </div>
+   </div>
 </div>
 
 {% endblock content %}

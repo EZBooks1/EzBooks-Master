@@ -17,9 +17,9 @@
 
                   <div class="bottom-info">
                      <p>Don't have an account yet?</p>
-                     <p><a href="{% url 'users:register' %}">Register Here</a></p>
+                     <p><a class="modal-link" href="{% url 'users:register' %}">Register Here</a></p>
                      <p>or</p>
-                     <p><a href="#">Login as Guest</a></p>
+                     <p><a class="modal-link" href="#">Login as Guest</a></p>
                   </div>
 
                   <input type="hidden" name="next" value="{% url 'ez_main:home_page' %}"/>

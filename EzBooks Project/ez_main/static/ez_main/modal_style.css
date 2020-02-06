@@ -26,12 +26,12 @@
    text-decoration: underline;
 }
 
-.modal-content a 
+.modal-link 
 {
    color: #dce5e0;
 }
 
-.modal-content a:hover 
+.modal-link:hover
 {
    color: #1abc9c;
 }
@@ -44,12 +44,6 @@
 .bottom-info p:first-of-type, .bottom-info p:last-of-type 
 {
    margin-bottom: 20px;
-}
-
-/* overwrite the existing button style */
-#submit-btn 
-{
-   margin-left: 5px;
 }
 
 /* margin for the input forms */
