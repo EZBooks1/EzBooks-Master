@@ -4,6 +4,9 @@
 
 from django.db import models
 from users.models import *
+from random import randint
+from random import seed
+from datetime import datetime
 
 class Classes_list(models.Model):
    """ Complete list of all classes """
@@ -53,3 +56,41 @@ class Class_schedule(models.Model):
       self.class6 = str(random_classes[5])
 
       return random_classes
+
+class Book_list(models.Model):
+    """ Complete list of all the textbooks """
+    department_name = models.CharField(max_length=200)
+    course          = models.CharField(max_length=200)
+    textbook        = models.CharField(max_length=200)
+    edition         = models.CharField(max_length=200)
+    isbn            = models.CharField(max_length=200)
+
+    def __str__(self):
+        """ Returning a string representation of the model """
+        return self.textbook
+
+class Books(models.Model):
+   """ List of the books needed by each user """
+   user_id           = models.ForeignKey(User_profile ,on_delete=models.CASCADE, primary_key=False)
+   textbook_name     = models.CharField(max_length=200)
+   used_rental_price = models.IntegerField(default=25)
+   new_rental_price  = models.IntegerField(default=25)
+   used_buy_price    = models.IntegerField(default=25)
+   new_buy_priced    = models.IntegerField(default=25)
+
+   def __str__(self):
+      """ Returning a string representation of the model """
+      return self.textbook_name
+
+   def find_books(self, extension, user):
+      """ Look up the textbooks needed for each class by class extension """
+      page = Books()
+      for p in Book_list.objects.raw("select id from main_db.ez_main_book_list where course = %s", [extension]):
+
+         if page.textbook_name != p.textbook:
+            seed(datetime.now())
+            page = Books.objects.create(textbook_name = p.textbook, used_rental_price = randint(100,300), new_rental_price =randint(100,300), used_buy_price=randint(100,300), new_buy_priced=randint(100,300), user_id = user)
+         else:
+            break
+
+      return self

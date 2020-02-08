@@ -135,8 +135,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+
 # Redirect Framework to use the custom user form
 AUTH_USER_MODEL = 'users.User_profile'
+
 
 # Redefine the session cookie for each user
 SESSION_COOKIE_AGE = 86400

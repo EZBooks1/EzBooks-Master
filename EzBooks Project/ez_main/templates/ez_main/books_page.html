@@ -3,5 +3,15 @@
 <!-- No specific style sheet for the books page -->
 
 {% block content %}
-   This is a test
+
+   <p>This is the books page</p>
+   <h4>Class Schedule for {{user.username}}</h4>
+      {% for obj in user_books %}
+         <tr class="table-success">
+            <td>{{obj.textbook_name}}</td>
+            <td>{{obj.used_rental_price}}</td>
+            <td id="credit">{{obj.new_rental_price}}</td>
+         </tr>
+      {% endfor %}
+
 {% endblock content %}
