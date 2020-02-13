@@ -77,6 +77,7 @@ class Books(models.Model):
    new_rental_price  = models.IntegerField(default=25)
    used_buy_price    = models.IntegerField(default=25)
    new_buy_priced    = models.IntegerField(default=25)
+   # Course to which the book belongs??
 
    def __str__(self):
       """ Returning a string representation of the model """

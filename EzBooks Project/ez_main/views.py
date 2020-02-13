@@ -3,6 +3,8 @@
 ###############################################################################
 
 from django.shortcuts import render
+from django.http import HttpResponseRedirect, Http404
+from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .models import *
 
@@ -17,10 +19,10 @@ def about_page(request):
 @login_required
 def class_page(request):
    """ Return the users class schedule page """
-   array1 = [1,2,3,4,5,6]
-   count = 0
-   book  = Books()
-   user    = request.user
+   class_extensions = []  # Empty list used to store the class extensions
+   book  = Books()        # Books object initialization
+   user  = request.user   # Get the currently authenticated user
+
    class1  = user.class_schedule.class1
    class2  = user.class_schedule.class2
    class3  = user.class_schedule.class3
@@ -29,26 +31,30 @@ def class_page(request):
    class6  = user.class_schedule.class6
    classes = Classes_list()
    display_classes = classes.display_classes(class1, class2, class3, class4, class5, class6)
-   for obj in display_classes:
-      a = obj.class_extension
-      array1[count]=a
-      count+=1
-   count = 0
 
-   for x in range(6):
-      book = book.find_books(array1[count], user)
-      count+=1
+   # Regenerate a new schedule based on the users major
+   if request.method == 'POST':
+      new_users_schedule = Class_schedule(user.id)
+      new_users_schedule.create_class(user.major)
+      new_users_schedule.save()       
+      return HttpResponseRedirect(reverse('ez_main:class_page'))
+
+   for obj in display_classes:
+      class_extensions.append(obj.class_extension)
+
+   # Needs to be a function of the model itself, removing any duplicate info.
+   for extention in class_extensions:
+      book = book.find_books(extention, user)
 
    return render(request, 'ez_main/class_page.html', {'display_classes': display_classes})
 
 @login_required
 def books_page(request):
    """ Return the users needed textbooks page """
-   user_books = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]
-   user  = request.user
-   count = 0
-   for z in Books.objects.filter(user_id__pk=user.id):
-      user_books[count] = z
-      count+=1
+   user_books = []      # Create an empty list for the users books
+   user  = request.user # Get the currently authenticated user
+
+   for book in Books.objects.filter(user_id__pk=user.id):
+      user_books.append(book)
 
    return render(request, 'ez_main/books_page.html', {'user_books': user_books})
