@@ -1,0 +1,70 @@
+@charset "utf-8";
+
+.main-section 
+{
+   margin: 0 auto;
+   margin-top: 140px;
+   padding: 0;
+}
+
+.modal-content 
+{
+   background: rgba(44, 62, 80, 0.9);
+   padding: 0 20px;
+   border-radius: 15px;
+   border: 3px;
+   border-style: solid;
+   border-color: #dce5e0;
+   color: #dce5e0;
+}
+
+.modal-content h4 
+{
+   margin-bottom: 25px;
+   padding: 15px 0;
+   font-size: 32px;
+   text-decoration: underline;
+}
+
+.modal-link 
+{
+   color: #dce5e0;
+}
+
+.modal-link:hover
+{
+   color: #1abc9c;
+}
+
+.modal-content p 
+{
+   margin: 0px;
+}
+
+.bottom-info p:first-of-type, .bottom-info p:last-of-type 
+{
+   margin-bottom: 20px;
+}
+
+/* margin for the input forms */
+input 
+{
+   margin-bottom: 10px;
+}
+
+select 
+{
+   margin-bottom: 10px;
+   width: 83%;
+}
+
+/* Styles for any tables */
+.table-success, .table-success > td, .table-success > th 
+{
+   background-color: #dce5e0;
+}
+
+#credit 
+{
+   text-align: center;
+}

@@ -1,0 +1,121 @@
+{% extends "ez_main/base.html" %}
+
+<!-- Uses the aboutpage_style.css file located in the ez_main app static folder -->
+
+{% block content %}
+<div id="wrapper" class="wrapper">
+
+   <!-- Start Flipbox Style-->
+   <div class="section-flipbox section-ptb-120">
+      <div class="container">
+
+         <div class="row">
+            <!-- Start of Flipbox 1 -->
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+               <div class="square-flip charity-flip">
+                  <div class="square">
+                     <div class="square-container">
+                        <span>About</span>
+                     </div>
+                     <div class="flip-overlay"></div>
+                  </div>
+
+                  <div class="square2">
+                     <div class="square-container2">
+                        <h2>About Simple Scholar</h2>
+                        <p>The goal of Simple Scholar is to provide a simple, and convenient method for you, as a busy student, to get your textbooks for the semester!</p>
+                     </div>
+                     <div class="flip-overlay"></div>
+                  </div>
+               </div>
+            </div>
+            <!-- End of Flipbox 1 -->
+
+            <!-- Start of Flipbox 2 -->
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+               <div class="square-flip charity-flip">
+                  <div class="square">
+                     <div class="square-container">
+                        <span>The Team</span>
+                     </div>
+                     <div class="flip-overlay"></div>
+                  </div>
+
+                  <div class="square2">
+                     <div class="square-container2">
+                        <h2>The Simple Scholar Team</h2>
+                        <p>Consisting of several college students who know all to well the experience of getting textbooks the hard way, the Simple Scholar team set out to solve these devastating stuggles for all future students.</p>
+                     </div>
+                     <div class="flip-overlay"></div>
+                  </div>
+               </div>
+            </div>
+            <!-- End of Flipbox 2 -->
+
+            <!-- Start of Flipbox 3 -->
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+               <div class="square-flip charity-flip">
+                  <div class="square">
+                     <div class="square-container">
+                        <span>Services</span>
+                     </div>
+                     <div class="flip-overlay"></div>
+                  </div>
+
+                  <div class="square2">
+                     <div class="square-container2">
+                        <h2>Services</h2>
+                        <p>Simple Scholar offers delivery of your textbook order directly to your dorm room. In addition, all orders are available for pickup at the MK Great Hall within 30 minutes of placing your order.</p>
+                     </div>
+                     <div class="flip-overlay"></div>
+                  </div>
+               </div>
+            </div>
+            <!-- End of Flipbox 3 -->
+
+         </div>
+      </div>
+   </div>
+   <!-- End Flipbox Style-->
+
+   <!-- Additional info to help the users -->
+   <div class="help-info">
+      <p>
+         &emsp;This website is intended to act as an additional tool for an
+         existing college class registration system, to simulate this,
+         we ask all users to select a major when they register for our website.
+         The major you choose will then be used to randomly generate a mock
+         class schedule for you. This mock schedule is a key element in order
+         to demonstrate the true functionality of our website.
+      </p>
+   </div>
+   
+   <div class="help-info">
+      <p>
+         &emsp;After registering for our website, you will be shown your
+         generated schedule, and given the option to regenerate your schedule
+         if you wish. Once you confirm your schedule, you will be taken to the
+         book selection page. Each book on this page is gathered according to the
+         textbook needs of the classes in your schedule. Here you can choose to
+         remove any books which you may already own, or have chosen to purchase
+         elsewhere.
+      </p>
+   </div>
+   
+   <div class="help-info">
+      <p>
+         &emsp;Once you finish choosing which textbooks to order, you will be
+         brought to the checkout page. On this page you will be given the
+         option to rent or buy both new or used textbooks. After choosing your
+         textbook purchasing preferences, you will be asked if you would like to
+         have your order either picked up or delivered. Once you confirm your order
+         you will move one to the payment process after that you are done!
+      </p>
+   
+      <a class="btn btn-primary btn3d" id="start-btn" href="{% url 'users:register' %}">Get Started!</a>
+   
+   </div>
+
+</div>
+
+{% endblock content %}

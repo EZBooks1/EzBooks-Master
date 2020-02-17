@@ -1,0 +1,32 @@
+{% extends "ez_main/base.html" %}
+
+<!-- Uses the modal_style.css file (located in the ez_main app static folder) -->
+
+{% block content %}
+
+<!-- Bootstrap modal box for the login form -->
+<div class="modal-dialog text-center">
+   <div class="col-sm-8 main-section">
+      <div class="modal-content">
+         <div class="col-12">
+            <h4>Login Here!</h4>
+            <form method="post" action="{% url 'users:login' %}" class="form">
+               {% csrf_token %}
+               {{ form.as_p }}
+                  <button name="submit" class="btn btn-primary btn3d" id="submit-btn">Login</button>
+
+                  <div class="bottom-info">
+                     <p>Don't have an account yet?</p>
+                     <p><a class="modal-link" href="{% url 'users:register' %}">Register Here</a></p>
+                     <p>or</p>
+                     <p><a class="modal-link" href="#">Login as Guest</a></p>
+                  </div>
+
+                  <input type="hidden" name="next" value="{% url 'ez_main:home_page' %}"/>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
+
+{% endblock content %}
