@@ -1,0 +1,28 @@
+{% extends "ez_main/base.html" %}
+
+<!-- Uses the home_styles.css file (located in the ez_main app static folder) -->
+
+{% block content %}
+<div class="homepage-info">
+   <h1>Welcome to Simple Scholar!</h1>
+
+   <p>
+      <br />
+      This website will help you to order your textbooks according to
+      your class schedule and the books required for those classes.
+   </p>
+</div>
+
+<!-- Modal containing homepage navigation links -->
+<div class="modal-dialog text-center">
+   <div class="col-sm-8 main-section home-modal">
+      <div class="modal-content">
+         <div class="col-12">
+            <a class="btn btn-primary btn3d home-btn" href="{% url 'users:register' %}">Get Started Now!</a>
+            <a class="btn btn-primary btn3d home-btn" href="{% url 'ez_main:about_page' %}">Get Started With Some Help!</a>
+         </div>
+      </div>
+   </div>
+</div>
+
+{% endblock content %}

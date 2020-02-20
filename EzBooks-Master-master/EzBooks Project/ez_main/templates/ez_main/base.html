@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8"/>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+      <title>Simple Scholar</title>
+
+      <!-- Bootstrap CSS stylesheet -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+
+      <!-- JQuery and JS For Bootstrap -->
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+      <!-- Stylesheets for the web pages -->
+      {% load static %}
+      <link href="{% static "ez_main/base_style.css" %}" rel="stylesheet"/>
+      <link href="{% static "ez_main/aboutpage_style.css" %}" rel="stylesheet"/>
+      <link href="{% static "ez_main/modal_style.css" %}" rel="stylesheet"/>
+      <link href="{% static "ez_main/home_styles.css" %}" rel="stylesheet"/>
+      <!-- <link href="{% static "ez_main/plugins.css" %}" rel="stylesheet"/> -->
+        
+   </head>
+
+<body>
+   <!-- Navbar displayed at all times on the project -->
+   <!-- Uses the base_styles.css file (Global styles for the pages are in this file as well) -->
+   <nav class="navbar-nav navbar-expand-lg bg-dark navbar-dark">
+      <a class="navbar-brand" href="{% url 'ez_main:home_page' %}">EzBooks</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+      </button>
+        
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+         <ul class="side-navbar-nav navbar-nav ml-auto">
+         <!-- Display certain navbar links only when the user is logged in -->
+         {% if user.is_authenticated %}
+            <li class="nav-item">
+               <p>Hello, &nbsp; {{ user.username }}.</p>
+            </li>
+            <li class="nav-item">
+               <div class="dropdown">
+                  <button class="btn btn-primary btn3d" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Personal Info</button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                     <a class="dropdown-item" href="{% url 'ez_main:class_page' %}">Your Schedule</a>
+                     <a class="dropdown-item" href="{% url 'ez_main:books_page' %}">Your Books</a>
+                  </div>
+               </div>
+            </li>
+            <li class="nav-item">
+               <a class="main-btn btn btn-primary btn3d" href="{% url 'users:logout' %}">Log out</a>
+            </li>
+         {% else %}
+            <li class="nav-item">
+               <a class="main-btn btn btn-primary btn3d" href="{% url 'users:login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+               <a class="main-btn btn btn-primary btn3d" href="{% url 'users:register' %}">Register</a>
+            </li>
+         {% endif %}
+            <li class="nav-item">
+               <a class="main-btn btn btn-primary btn3d" id="last" href="#">Shopping Cart</a>
+            </li>
+         </ul>
+      </div>
+   </nav>
+
+   <!-- Container for content loaded with the project views -->
+   <div class="content-wrap">
+      <div class="body-content">
+         <div class="page-header">
+            {% block header%}{% endblock header %}
+         </div>
+
+         <div class="page-content">
+            {% block content %}{% endblock content %}
+         </div>
+      </div>
+
+      <!-- Global website Footer -->
+      <footer class="page-footer">
+         <!-- Footer Links -->
+         <div class="container-fluid text-center text-md-left">
+            <div class="row">
+               <div class="col-md-3 mb-md-0 mb-3">
+                  <!-- 1st Column Links -->
+                  <h5 class="text-uppercase">Additional Information</h5>
+                  <ul class="list-unstyled">
+                     <li>
+                        <a href="{% url 'ez_main:about_page' %}">About</a>
+                     </li>
+                     <li>
+                        <a href="#!">Contact Info</a>
+                     </li>
+                  </ul>
+               </div>
+
+               <div class="col-md-3 mb-md-0 mb-3">
+                  <!-- 2nd Column Links -->
+                  <h5 class="text-uppercase">Join Simple Scholar</h5>
+                  <ul class="list-unstyled">
+                     <li>
+                        <a href="{% url 'users:login' %}">Login</a>
+                     </li>
+                     <li>
+                        <a href="{% url 'users:register' %}">Register</a>
+                     </li>
+                  </ul>
+               </div>
+
+               <div class="col-md-3 mb-md-0 mb-3">
+                  <!-- 3rd Column Links -->
+                  <h5 class="text-uppercase">Even more links</h5>
+                  <ul class="list-unstyled">
+                     <li>
+                        <a href="#">Stuff</a>
+                     </li>
+                     <li>
+                        <a href="#">Shopping Cart</a>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+
+         <div class="footer-copyright text-center py-3">
+            <p>© 2019 Copyright: Ezbooks</p>
+         </div>
+      </footer>
+
+   </div>
+
+</body>
+</html>
