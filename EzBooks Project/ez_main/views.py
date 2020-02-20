@@ -22,6 +22,7 @@ def class_page(request):
    class_extensions = []  # Empty list used to store the class extensions
    book  = Books()        # Books object initialization
    user  = request.user   # Get the currently authenticated user
+   no_books = True        # Flag value, assuming no books exist for a user
 
    class1  = user.class_schedule.class1
    class2  = user.class_schedule.class2
@@ -31,6 +32,10 @@ def class_page(request):
    class6  = user.class_schedule.class6
    classes = Classes_list()
    display_classes = classes.display_classes(class1, class2, class3, class4, class5, class6)
+
+   # Check to see if books exist yet for a user
+   for book in Books.objects.filter(user_id__pk=user.id)[:1]:
+      no_books = False
 
    # Regenerate a new schedule based on the users major
    if request.method == 'POST':
@@ -42,9 +47,10 @@ def class_page(request):
    for obj in display_classes:
       class_extensions.append(obj.class_extension)
 
-   # Needs to be a function of the model itself, removing any duplicate info.
-   for extention in class_extensions:
-      book = book.find_books(extention, user)
+   # If no books exist for the user, get the users books based on classes
+   if no_books:
+      print("made the books!")
+      book = book.find_books(class_extensions, user)
 
    return render(request, 'ez_main/class_page.html', {'display_classes': display_classes})
 

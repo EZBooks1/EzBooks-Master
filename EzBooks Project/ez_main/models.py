@@ -83,15 +83,31 @@ class Books(models.Model):
       """ Returning a string representation of the model """
       return self.textbook_name
 
-   def find_books(self, extension, user):
+   def find_books(self, extensions, user):
       """ Look up the textbooks needed for each class by class extension """
-      page = Books()
-      for p in Book_list.objects.raw("select id from main_db.ez_main_book_list where course = %s", [extension]):
+      page = Books() # Instantiate an instance of the books class
+      all_books = [] # Empty list for all the textbook names
 
-         if page.textbook_name != p.textbook:
-            seed(datetime.now())
-            page = Books.objects.create(textbook_name = p.textbook, used_rental_price = randint(100,300), new_rental_price =randint(100,300), used_buy_price=randint(100,300), new_buy_priced=randint(100,300), user_id = user)
+      # Loop through all class extensions, finding each book for the respective class
+      for extension in extensions:
+         for obj in Book_list.objects.raw("select id from main_db.ez_main_book_list where course = %s", [extension]):
+            all_books.append(obj.textbook)
+
+      # Remove any duplicate textbooks
+      for book in all_books:
+         # Check to see if there is more than one instance of each textbook
+         if all_books.count(book) > 1:
+            all_books.remove(book)
+
+      # Save the final books list into the database with the appropriate data
+      for book in all_books:
+         seed(datetime.now())
+         price = randint(50,350)
+                  
+         # Assign a price of zero to all the classes which do not require a textbook
+         if book == 'NO TEXT REQUIRED':
+            page = Books.objects.create(textbook_name = book, used_rental_price = 0, new_rental_price = 0, used_buy_price = 0, new_buy_priced = 0, user_id = user)
          else:
-            break
+            page = Books.objects.create(textbook_name = book, used_rental_price = price / 3, new_rental_price = price / 2, used_buy_price = price * (2/3), new_buy_priced = price, user_id = user)
 
       return self
