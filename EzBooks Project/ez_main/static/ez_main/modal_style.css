@@ -18,6 +18,18 @@
    color: #dce5e0;
 }
 
+.medium
+{
+   width: 55%;
+   margin: 15px auto;
+}
+
+.big
+{
+   width: 75%;
+   margin: 15px auto;
+}
+
 .modal-content h4 
 {
    margin-bottom: 25px;

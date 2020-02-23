@@ -22,6 +22,9 @@
 
                <input type="hidden" name="next" value="{% url 'ez_main:home_page' %}"/>
             </form>
+            {% if message %}
+               <script>alert('{{message}}');</script>
+            {% endif %}
          </div>
       </div>
    </div>

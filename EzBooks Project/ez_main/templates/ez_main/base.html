@@ -5,7 +5,7 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
       <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-      <title>Simple Scholar</title>
+      <title>EagleBooks</title>
 
       <!-- Bootstrap CSS stylesheet -->
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
@@ -29,7 +29,10 @@
    <!-- Navbar displayed at all times on the project -->
    <!-- Uses the base_styles.css file (Global styles for the pages are in this file as well) -->
    <nav class="navbar-nav navbar-expand-lg bg-dark navbar-dark">
-      <a class="navbar-brand" href="{% url 'ez_main:home_page' %}">EzBooks</a>
+      <a class="navbar-brand" href="{% url 'ez_main:home_page' %}">
+         <img src="{% static 'ez_main/eaglebooks_logo.jpg' %}" alt="" width="90" height="90">
+         EagleBooks
+      </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
          <span class="navbar-toggler-icon"></span>
       </button>

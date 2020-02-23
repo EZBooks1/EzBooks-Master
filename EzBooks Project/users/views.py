@@ -22,20 +22,26 @@ def register(request):
    else:
       # Process the complete form
       form = User_profileForm(data=request.POST)
-    
-   if form.is_valid():
-      # Authenticate user and save into the database
-      username = form.cleaned_data.get('username')
-      password = form.cleaned_data.get('password1')
-      new_user = form.save()
-      authenticated_user = authenticate(username=username, password=password)
-      auth_login(request, authenticated_user)
 
-      # Create class schedule for the user based on their chosen major
-      new_users_schedule = Class_schedule(user_id=authenticated_user)
-      new_users_schedule.create_class(authenticated_user.major)
-      new_users_schedule.save()       
-      return HttpResponseRedirect(reverse('ez_main:class_page'))
+   user = request.user # Get the current user, if there is one logged in
+   if not user.is_authenticated:
+      if form.is_valid():
+         # Authenticate user and save into the database
+         username = form.cleaned_data.get('username')
+         password = form.cleaned_data.get('password1')
+         new_user = form.save()
+         authenticated_user = authenticate(username=username, password=password)
+         auth_login(request, authenticated_user)
+
+         # Create class schedule for the user based on their chosen major
+         new_users_schedule = Class_schedule(user_id=authenticated_user)
+         new_users_schedule.create_class(authenticated_user.major)
+         new_users_schedule.save()       
+         return HttpResponseRedirect(reverse('ez_main:class_page'))
+   else:
+      message = "Please log out before registering for another account"
+      context = {'form': form, 'message': message}
+      return render(request, 'users/register.html', context)
     
    context = {'form': form}
    return render(request, 'users/register.html', context)

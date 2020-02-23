@@ -41,7 +41,9 @@ def class_page(request):
    if request.method == 'POST':
       new_users_schedule = Class_schedule(user.id)
       new_users_schedule.create_class(user.major)
-      new_users_schedule.save()       
+      new_users_schedule.save()
+      Books.objects.filter(user_id__pk=user.id).delete()
+      no_books = True
       return HttpResponseRedirect(reverse('ez_main:class_page'))
 
    for obj in display_classes:
@@ -49,7 +51,6 @@ def class_page(request):
 
    # If no books exist for the user, get the users books based on classes
    if no_books:
-      print("made the books!")
       book = book.find_books(class_extensions, user)
 
    return render(request, 'ez_main/class_page.html', {'display_classes': display_classes})
@@ -63,4 +64,18 @@ def books_page(request):
    for book in Books.objects.filter(user_id__pk=user.id):
       user_books.append(book)
 
+   # Delete books from the users list of books on button click
+   if request.POST:
+      for book in user_books:
+         if str(book.id) in request.POST:
+            print("Deleting this book now")
+            Books.objects.filter(id=book.id).delete()
+            break
+      return HttpResponseRedirect(reverse('ez_main:books_page'))
+
    return render(request, 'ez_main/books_page.html', {'user_books': user_books})
+
+@login_required
+def checkout_page(request):
+   """ Return the checkout page """
+   return render(request, 'ez_main/checkout_page.html')

@@ -20,4 +20,7 @@ urlpatterns = [
 
    # Book page path
    path('books/', views.books_page, name='books_page'),
+
+   # Checkout page path
+   path('checkout/', views.checkout_page, name="checkout_page"),
 ]

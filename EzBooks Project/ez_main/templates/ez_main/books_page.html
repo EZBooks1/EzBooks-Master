@@ -1,6 +1,6 @@
 {% extends "ez_main/base.html" %}
 
-<!-- No specific style sheet for the books page -->
+<!-- Uses the modal_style.css file -->
 
 {% block content %}
 
@@ -13,7 +13,7 @@
       </div>
    </div>
    
-   <div class="modal-dialog">
+   <div class="modal-content big">
       <table class="table">
          <thead class="thead-dark">
             <tr>
@@ -30,15 +30,19 @@
             {% for obj in user_books %}
             <tr class="table-success">
                <td>{{obj.textbook_name}}</td>
-               <td>{{obj.new_buy_priced}}</td>
-               <td>{{obj.used_buy_price}}</td>
-               <td>{{obj.new_rental_price}}</td>
-               <td>{{obj.used_rental_price}}</td>
-               <td><a class="btn btn-primary btn3d" href="#">Delete</a></td>
+               <td>$ {{obj.new_buy_priced}}</td>
+               <td>$ {{obj.used_buy_price}}</td>
+               <td>$ {{obj.new_rental_price}}</td>
+               <td>$ {{obj.used_rental_price}}</td>
+               <form method="post" action="{% url 'ez_main:books_page' %}">
+                  {% csrf_token %}
+                  <td><button type="submit" class="btn btn-primary btn3d" name="{{ obj.id }}">Delete</button></td>
+               </form> 
             </tr>
             {% endfor %}
          </tbody>
       </table>
+      <a class="btn btn-primary btn3d" href="{% url 'ez_main:checkout_page' %}">Checkout</a>
    </div>
 
 {% endblock content %}
