@@ -19,10 +19,10 @@ def about_page(request):
 @login_required
 def class_page(request):
    """ Return the users class schedule page """
-   class_extensions = []  # Empty list used to store the class extensions
-   book  = Books()        # Books object initialization
-   user  = request.user   # Get the currently authenticated user
-   no_books = True        # Flag value, assuming no books exist for a user
+   class_extensions = []   # Empty list used to store the class extensions
+   book     = Books()      # Books object initialization
+   user     = request.user # Get the currently authenticated user
+   no_books = True         # Flag value, assuming no books exist for a user
 
    class1  = user.class_schedule.class1
    class2  = user.class_schedule.class2
@@ -58,8 +58,8 @@ def class_page(request):
 @login_required
 def books_page(request):
    """ Return the users needed textbooks page """
-   user_books = []      # Create an empty list for the users books
-   user  = request.user # Get the currently authenticated user
+   user_books = []           # Create an empty list for the users books
+   user       = request.user # Get the currently authenticated user
 
    for book in Books.objects.filter(user_id__pk=user.id):
       user_books.append(book)
@@ -68,7 +68,6 @@ def books_page(request):
    if request.POST:
       for book in user_books:
          if str(book.id) in request.POST:
-            print("Deleting this book now")
             Books.objects.filter(id=book.id).delete()
             break
       return HttpResponseRedirect(reverse('ez_main:books_page'))
@@ -78,4 +77,10 @@ def books_page(request):
 @login_required
 def checkout_page(request):
    """ Return the checkout page """
-   return render(request, 'ez_main/checkout_page.html')
+   user_books = []           # List of the users books which they are trying to buy
+   user       = request.user # Get the currently authenticated user
+
+   for book in Books.objects.filter(user_id__pk=user.id):
+      user_books.append(book)
+
+   return render(request, 'ez_main/checkout_page.html', {'user_books': user_books})
