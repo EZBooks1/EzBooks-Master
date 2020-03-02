@@ -11,7 +11,8 @@
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
 
       <!-- JQuery and JS For Bootstrap -->
-      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script> -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
@@ -22,7 +23,7 @@
       <link href="{% static "ez_main/modal_style.css" %}" rel="stylesheet"/>
       <link href="{% static "ez_main/home_styles.css" %}" rel="stylesheet"/>
       <!-- <link href="{% static "ez_main/plugins.css" %}" rel="stylesheet"/> -->
-        
+       
    </head>
 
 <body>
@@ -30,7 +31,7 @@
    <!-- Uses the base_styles.css file (Global styles for the pages are in this file as well) -->
    <nav class="navbar-nav navbar-expand-lg bg-dark navbar-dark">
       <a class="navbar-brand" href="{% url 'ez_main:home_page' %}">
-         <img src="{% static 'ez_main/eaglebooks_logo.jpg' %}" alt="" width="90" height="90">
+         <img src="{% static 'ez_main/EagleBooks_Logo.png' %}" alt="" width="90" height="90">
          EagleBooks
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,7 +66,7 @@
             </li>
          {% endif %}
             <li class="nav-item">
-               <a class="main-btn btn btn-primary btn3d" id="last" href="{% url 'ez_main:checkout_page' %}">Shopping Cart</a>
+               <a class="main-btn btn btn-primary btn3d" id="last" href="{% url 'ez_main:checkout_summary' %}">Shopping Cart</a>
             </li>
          </ul>
       </div>

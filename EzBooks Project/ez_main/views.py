@@ -33,25 +33,27 @@ def class_page(request):
    classes = Classes_list()
    display_classes = classes.display_classes(class1, class2, class3, class4, class5, class6)
 
-   # Check to see if books exist yet for a user
-   for book in Books.objects.filter(user_id__pk=user.id)[:1]:
-      no_books = False
-
-   # Regenerate a new schedule based on the users major
-   if request.method == 'POST':
-      new_users_schedule = Class_schedule(user.id)
-      new_users_schedule.create_class(user.major)
-      new_users_schedule.save()
-      Books.objects.filter(user_id__pk=user.id).delete()
-      no_books = True
-      return HttpResponseRedirect(reverse('ez_main:class_page'))
-
+   # Get all the class extensions
    for obj in display_classes:
       class_extensions.append(obj.class_extension)
 
-   # If no books exist for the user, get the users books based on classes
-   if no_books:
-      book = book.find_books(class_extensions, user)
+   if request.POST:
+      # Regenerate a schedule for the user on button click
+      if 'regenerate' in request.POST:
+         new_users_schedule = Class_schedule(user.id)
+         new_users_schedule.create_class(user.major)
+         new_users_schedule.save()
+         Books.objects.filter(user_id__pk=user.id).delete()
+         no_books = True
+         return HttpResponseRedirect(reverse('ez_main:class_page'))
+   
+      # Get books for the user if they have none on button click
+      if 'confirm' in request.POST:
+         for book in Books.objects.filter(user_id__pk=user.id)[:1]:
+            no_books = False
+         if no_books:
+            book = book.find_books(class_extensions, user)
+         return HttpResponseRedirect(reverse('ez_main:books_page'))
 
    return render(request, 'ez_main/class_page.html', {'display_classes': display_classes})
 
@@ -75,12 +77,17 @@ def books_page(request):
    return render(request, 'ez_main/books_page.html', {'user_books': user_books})
 
 @login_required
-def checkout_page(request):
-   """ Return the checkout page """
+def checkout_summary(request):
+   """ Return a summary of the books being ordered by the user """
    user_books = []           # List of the users books which they are trying to buy
    user       = request.user # Get the currently authenticated user
 
    for book in Books.objects.filter(user_id__pk=user.id):
       user_books.append(book)
 
-   return render(request, 'ez_main/checkout_page.html', {'user_books': user_books})
+   return render(request, 'ez_main/checkout_summary.html', {'user_books': user_books})
+
+@login_required
+def checkout_page(request):
+   """ Return the page to collect purchase information from the user """
+   return render(request, 'ez_main/checkout_page.html')

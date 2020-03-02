@@ -23,7 +23,6 @@
                <th class="text-white bg-dark" scope="col">New Rental Price</th>
                <th class="text-white bg-dark" scope="col">Used Rental Price</th>
                <th class="text-white bg-dark" scope="col"></th>
-
             </tr>
          </thead>
          <tbody>
@@ -42,7 +41,7 @@
             {% endfor %}
          </tbody>
       </table>
-      <a class="btn btn-primary btn3d" href="{% url 'ez_main:checkout_page' %}">Checkout</a>
+      <a class="btn btn-primary btn3d" href="{% url 'ez_main:checkout_summary' %}">Checkout</a>
    </div>
 
 {% endblock content %}

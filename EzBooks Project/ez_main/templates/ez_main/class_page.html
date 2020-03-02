@@ -37,11 +37,10 @@
 
    <form method="post" action="{% url 'ez_main:class_page' %}" class="form">
       {% csrf_token %}
-         <button name="submit" class="btn btn-primary btn3d">Try A Different Schedule</button>
-         <input type="hidden" name="next" value="{% url 'ez_main:class_page' %}"/>
+         <button name="regenerate" class="btn btn-primary btn3d">Try A Different Schedule</button>
+         <button name="confirm" class="btn btn-primary btn3d">Confirm Your Schedule</button>
    </form>
-   
-   <a class="btn btn-primary btn3d" href="{% url 'ez_main:books_page' %}">Confirm Your Schedule</a>
+
 </div>
 
 {% endblock content %}

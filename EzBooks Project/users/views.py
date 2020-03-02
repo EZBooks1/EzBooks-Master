@@ -39,7 +39,7 @@ def register(request):
          new_users_schedule.save()       
          return HttpResponseRedirect(reverse('ez_main:class_page'))
    else:
-      message = "Please log out before registering for another account"
+      message = "Please log out before registering for another account."
       context = {'form': form, 'message': message}
       return render(request, 'users/register.html', context)
     

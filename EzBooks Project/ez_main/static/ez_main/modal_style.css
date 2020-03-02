@@ -58,6 +58,11 @@
    margin-bottom: 20px;
 }
 
+:not(:disabled):not(.disabled).btn-secondary.active, :not(:disabled):not(.disabled).btn-secondary:active, .show > .btn-secondary.dropdown-toggle
+{
+   background-color: #1abc9c;
+}
+
 /* margin for the input forms */
 input 
 {
@@ -68,6 +73,12 @@ select
 {
    margin-bottom: 10px;
    width: 83%;
+}
+
+.errorlist
+{
+   list-style: none;
+   padding: 0px;
 }
 
 /* Styles for any tables */
