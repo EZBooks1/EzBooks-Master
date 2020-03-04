@@ -47,13 +47,14 @@ class Class_schedule(models.Model):
    def create_class(self, major):
       """ Create a randomized class schedule based on major linked to a user """
       query_major = major
-      random_classes = Classes_list.objects.raw("select id, class_name from main_db.ez_main_classes_list where major = %s order by rand() limit 6", [query_major])
-      self.class1 = str(random_classes[0])
-      self.class2 = str(random_classes[1])
-      self.class3 = str(random_classes[2])
-      self.class4 = str(random_classes[3])
-      self.class5 = str(random_classes[4])
-      self.class6 = str(random_classes[5])
+      major_classes  = Classes_list.objects.raw("select id, class_name from main_db.ez_main_classes_list where major = %s order by rand() limit 3", [query_major])
+      random_classes = Classes_list.objects.raw("select distinct id, class_name from main_db.ez_main_classes_list where major = 'any' order by rand() limit 3")
+      self.class1 = str(major_classes[0])
+      self.class2 = str(major_classes[1])
+      self.class3 = str(major_classes[2])
+      self.class4 = str(random_classes[0])
+      self.class5 = str(random_classes[1])
+      self.class6 = str(random_classes[2])
 
       return random_classes
 
@@ -77,7 +78,6 @@ class Books(models.Model):
    new_rental_price  = models.IntegerField(default=25)
    used_buy_price    = models.IntegerField(default=25)
    new_buy_priced    = models.IntegerField(default=25)
-   # Course to which the book belongs??
 
    def __str__(self):
       """ Returning a string representation of the model """
@@ -96,7 +96,7 @@ class Books(models.Model):
       # Remove any duplicate textbooks
       for book in all_books:
          # Check to see if there is more than one instance of each textbook
-         if all_books.count(book) > 1:
+         while all_books.count(book) > 1:
             all_books.remove(book)
 
       # Save the final books list into the database with the appropriate data
@@ -106,7 +106,7 @@ class Books(models.Model):
                   
          # Assign a price of zero to all the classes which do not require a textbook
          if book == 'NO TEXT REQUIRED':
-            page = Books.objects.create(textbook_name = book, used_rental_price = 0, new_rental_price = 0, used_buy_price = 0, new_buy_priced = 0, user_id = user)
+            all_books.remove(book)
          else:
             page = Books.objects.create(textbook_name = book, used_rental_price = price / 3, new_rental_price = price / 2, used_buy_price = price * (2/3), new_buy_priced = price, user_id = user)
 

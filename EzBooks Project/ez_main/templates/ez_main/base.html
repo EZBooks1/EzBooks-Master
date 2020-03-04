@@ -87,51 +87,14 @@
       <!-- Global website Footer -->
       <footer class="page-footer">
          <!-- Footer Links -->
-         <div class="container-fluid text-center text-md-left">
-            <div class="row">
-               <div class="col-md-3 mb-md-0 mb-3">
-                  <!-- 1st Column Links -->
-                  <h5 class="text-uppercase">Additional Information</h5>
-                  <ul class="list-unstyled">
-                     <li>
-                        <a href="{% url 'ez_main:about_page' %}">About</a>
-                     </li>
-                     <li>
-                        <a href="#!">Contact Info</a>
-                     </li>
-                  </ul>
-               </div>
-
-               <div class="col-md-3 mb-md-0 mb-3">
-                  <!-- 2nd Column Links -->
-                  <h5 class="text-uppercase">Join Simple Scholar</h5>
-                  <ul class="list-unstyled">
-                     <li>
-                        <a href="{% url 'users:login' %}">Login</a>
-                     </li>
-                     <li>
-                        <a href="{% url 'users:register' %}">Register</a>
-                     </li>
-                  </ul>
-               </div>
-
-               <div class="col-md-3 mb-md-0 mb-3">
-                  <!-- 3rd Column Links -->
-                  <h5 class="text-uppercase">Even more links</h5>
-                  <ul class="list-unstyled">
-                     <li>
-                        <a href="#">Stuff</a>
-                     </li>
-                     <li>
-                        <a href="#">Shopping Cart</a>
-                     </li>
-                  </ul>
-               </div>
-            </div>
-         </div>
-
          <div class="footer-copyright text-center py-3">
-            <p>© 2019 Copyright: Ezbooks</p>
+            <a href="#">CONTACT INFORMATION</a></br>
+            <a href="{% url 'ez_main:about_page' %}">ABOUT</a></br>
+            <img src="{% static 'ez_main/EagleBooks_Logo.png' %}" alt="" width="30" height="30">agleBooks</br>
+            <a href="#" class="fa fa-instagram"></a>
+            <a href="#" class="fa fa-twitter"></a>
+            <a href="#" class="fa fa-linkedin"></a>
+            <p>© 2020 Copyright: EZbooks</p>
          </div>
       </footer>
 

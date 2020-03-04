@@ -1,49 +1,40 @@
 function calculate_pricing()
 {
-   var purchase_method; // Method for the purchase of the books (buy or rent)
-   var allNew;          // Array of all the new prices
-   var allUsed;         // Array of all the used prices
+   var buyButton  = document.getElementsByClassName('buy');  // Array of all the buy buttons
+   var rentButton = document.getElementsByClassName('rent'); // Array of all the rent buttons
    var newButton  = document.getElementsByClassName('new');  // Array of all the new buttons
    var usedButton = document.getElementsByClassName('used'); // Array of all the used buttons
-  
-   // Get the purchase method as indicated by the button currently active
-   if(document.getElementById("btn_buy").checked)
-   {
-      purchase_method = 'buy';
-   }
-   else if(document.getElementById("btn_rent").checked)
-   {
-      purchase_method = 'rent';
-   }
-   
-   // Get the array of prices only for the needed purchase method (buy or rent)
-   if(purchase_method == 'buy')
-   {
-      allNew = document.getElementsByClassName('newBuy');
-      allUsed = document.getElementsByClassName('usedBuy');
-   }
-   else if(purchase_method == 'rent')
-   {
-      allNew = document.getElementsByClassName('newRent');
-      allUsed = document.getElementsByClassName('usedRent');
-   }
 
    var index;
-   var length = allNew.length;
+   var length = buyButton.length;
    var text;
    var matches;
    var priceTotal = 0;
 
+   var newPrice;  // Array of only new prices
+   var usedPrice; // Array of only used prices
+
    for(index = 0; index < length; index++)
    {
+      if(buyButton[index].checked)
+      {
+         newPrice = document.getElementsByClassName('newBuy');
+         usedPrice = document.getElementsByClassName('usedBuy');  
+      }
+      else if(rentButton[index].checked)
+      {
+         newPrice = document.getElementsByClassName('newRent');
+         usedPrice = document.getElementsByClassName('usedRent'); 
+      }
+
       // Get the correct price (new or used)
       if(newButton[index].checked)
       {
-         text = allNew[index].innerText;
+         text = newPrice[index].innerText;
       }
       else if(usedButton[index].checked)
       {
-         text = allUsed[index].innerText;
+         text = usedPrice[index].innerText;
       }
 
       // Get the price as a number

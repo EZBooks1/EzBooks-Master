@@ -20,7 +20,8 @@
                <th class="text-white bg-dark" scope="col">Textbook Name</th>
                <th class="text-white bg-dark" scope="col">Purchase Price</th>
                <th class="text-white bg-dark" scope="col">Rental Price</th>
-               <th class="text-white bg-dark" scope="col"></th>
+               <th class="text-white bg-dark" scope="col">Book Condition</th>
+               <th class="text-white bg-dark" scope="col">Purchase Option</th>
             </tr>
          </thead>
          <tbody>
@@ -36,6 +37,16 @@
                      </label>
                      <label class="btn btn-secondary">
                         <input type="radio" name="book{{ obj.id }}" class="used" autocomplete="off"> Used
+                     </label>
+                  </div>
+               </td>
+               <td>
+                  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                     <label class="btn btn-secondary active">
+                        <input type="radio" name="buy/rent{{ obj.id }}" class="buy" autocomplete="off" checked> Buy
+                     </label>
+                     <label class="btn btn-secondary">
+                        <input type="radio" name="buy/rent{{ obj.id }}" class="rent" autocomplete="off"> Rent
                      </label>
                   </div>
                </td>
@@ -62,15 +73,6 @@
             <td id="grand_total"></td>
          </tr>
       </table>
-
-      <div class="btn-group btn-group-toggle" data-toggle="buttons">
-         <label class="btn btn-secondary active">
-            <input type="radio" name="buy/rent" id="btn_buy" autocomplete="off" checked> Buy
-         </label>
-         <label class="btn btn-secondary">
-            <input type="radio" name="buy/rent" id="btn_rent" autocomplete="off"> Rent
-         </label>
-      </div>
 
       <a class="btn btn-primary btn3d" href="{% url 'ez_main:checkout_page' %}">Confirm your selection</a>
    </div>
