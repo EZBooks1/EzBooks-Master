@@ -25,7 +25,7 @@ SECRET_KEY = '8dh+--*hl6nt!b!bdarw2py1r4y&^!=sr-abyd@0#4l=)5p2c*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['131173.pythonanywhere.com']
 
 
 # Application definition
@@ -87,12 +87,12 @@ WSGI_APPLICATION = 'EzBooks_Site.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'main_db',
-        'USER': 'admin',
-	    'PASSWORD': 'redskins3798',
-		'HOST':     'database-2.cxlya8s1760w.us-east-2.rds.amazonaws.com',
-		'PORT':     '3306',
-	
+        'NAME': '131173$default',
+        'USER': '131173',
+	    'PASSWORD': 'redskins1998',
+		'HOST':     '131173.mysql.pythonanywhere-services.com',
+
+
 	}
 }
 
@@ -134,6 +134,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = '/home/131173/EzBooks-Master/EzBooks Project/static'
 
 
 # Redirect Framework to use the custom user form
