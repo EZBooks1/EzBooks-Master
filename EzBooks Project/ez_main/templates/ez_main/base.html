@@ -11,8 +11,7 @@
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
 
       <!-- JQuery and JS For Bootstrap -->
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-      <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script> -->
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
@@ -31,8 +30,7 @@
    <!-- Uses the base_styles.css file (Global styles for the pages are in this file as well) -->
    <nav class="navbar-nav navbar-expand-lg bg-dark navbar-dark">
       <a class="navbar-brand" href="{% url 'ez_main:home_page' %}">
-         <img src="{% static 'ez_main/EagleBooks_Logo.png' %}" alt="" width="90" height="90">
-         EagleBooks
+         <img src="{% static 'ez_main/EagleBooks_Logo.png' %}" alt="" height ="90">
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
          <span class="navbar-toggler-icon"></span>
@@ -88,12 +86,9 @@
       <footer class="page-footer">
          <!-- Footer Links -->
          <div class="footer-copyright text-center py-3">
-            <a href="#">CONTACT INFORMATION</a></br>
-            <a href="{% url 'ez_main:about_page' %}">ABOUT</a></br>
-            <img src="{% static 'ez_main/EagleBooks_Logo.png' %}" alt="" width="30" height="30">agleBooks</br>
-            <a href="#" class="fa fa-instagram"></a>
-            <a href="#" class="fa fa-twitter"></a>
-            <a href="#" class="fa fa-linkedin"></a>
+            <a href="#">CONTACT INFORMATION</a> <br />
+            <a href="{% url 'ez_main:about_page' %}">ABOUT</a> <br />
+            <img src="{% static 'ez_main/EagleBooks_Logo.png' %}" alt="" height="30"> <br />
             <p>© 2020 Copyright: EZbooks</p>
          </div>
       </footer>

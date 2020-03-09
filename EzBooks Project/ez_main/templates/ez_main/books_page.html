@@ -36,13 +36,16 @@
                <td>$ {{obj.used_rental_price}}</td>
                <form method="post" action="{% url 'ez_main:books_page' %}">
                   {% csrf_token %}
-                  <td><button type="submit" class="btn btn-primary btn3d" name="{{ obj.id }}">Delete</button></td>
+                  <td><button type="submit" name="delete" class="btn btn-primary btn3d" value="{{ obj.id }}">Delete</button></td>
                </form> 
             </tr>
             {% endfor %}
          </tbody>
       </table>
       <a class="btn btn-primary btn3d" href="{% url 'ez_main:checkout_summary' %}">Checkout</a>
+
+      <a class="btn btn-primary btn3d" href="{% url 'ez_main:guest_login' %}">Set up guest payment</a>
+
    </div>
 
 {% endblock content %}

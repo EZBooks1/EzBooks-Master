@@ -48,7 +48,7 @@ class Class_schedule(models.Model):
       """ Create a randomized class schedule based on major linked to a user """
       query_major = major
       major_classes  = Classes_list.objects.raw("select id, class_name from main_db.ez_main_classes_list where major = %s order by rand() limit 3", [query_major])
-      random_classes = Classes_list.objects.raw("select distinct id, class_name from main_db.ez_main_classes_list where major = 'any' order by rand() limit 3")
+      random_classes = Classes_list.objects.raw("select id, class_name from main_db.ez_main_classes_list where major = 'any' order by rand() limit 3")
       self.class1 = str(major_classes[0])
       self.class2 = str(major_classes[1])
       self.class3 = str(major_classes[2])

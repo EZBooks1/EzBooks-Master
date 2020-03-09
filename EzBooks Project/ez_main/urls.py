@@ -26,4 +26,10 @@ urlpatterns = [
 
    # Checkout page path
    path('checkout/', views.checkout_page, name='checkout_page'),
+
+   # Checkout submission page
+   path('confirmation/', views.confirmation_page, name='confirmation_page'),
+
+   # Guest login page
+   path('guests/', views.guest_login, name="guest_login"),
 ]

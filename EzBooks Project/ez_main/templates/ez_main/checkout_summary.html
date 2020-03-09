@@ -8,7 +8,24 @@
       <div class= "main-section">
          <div class="modal-content">
             <h4>{{user.username}}'s Checkout Summary</h4>
-            <br />
+
+            <table class="pricing-container">
+               <tr>
+                  <th colspan="2">Your Totals</th>
+               </tr>
+               <tr>
+                  <td>SubTotal:</td>
+                  <td id="total_price"></td>
+               </tr>
+               <tr>
+                  <td>Tax:</td>
+                  <td id="tax_amount"></td>
+               </tr>
+               <tr>
+                  <td>Total:</td>
+                  <td id="grand_total"></td>
+               </tr>
+            </table>
          </div>
       </div>
    </div>
@@ -55,26 +72,12 @@
          </tbody>
       </table>
 
-      <table class="pricing_container">
-         <tr>
-            <th>Your Totals</th>
-            <th></th>
-         </tr>
-         <tr>
-            <td>SubTotal:</td>
-            <td id="total_price"></td>
-         </tr>
-         <tr>
-            <td>Tax:</td>
-            <td id="tax_amount"></td>
-         </tr>
-         <tr>
-            <td>Total:</td>
-            <td id="grand_total"></td>
-         </tr>
-      </table>
+      <form method="post" action="{% url 'ez_main:checkout_summary' %}" class="form">
+         {% csrf_token %}
+            <input type="hidden" name="total" id="total"/>
+            <button name="submit" class="btn btn-primary btn3d">Confirm your selection</button>
+      </form>
 
-      <a class="btn btn-primary btn3d" href="{% url 'ez_main:checkout_page' %}">Confirm your selection</a>
    </div>
 
 {% load static %}

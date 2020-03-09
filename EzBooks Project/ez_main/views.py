@@ -7,6 +7,7 @@ from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .models import *
+import users
 
 def home_page(request):
    """ Return the home page for ez_main """
@@ -67,16 +68,13 @@ def books_page(request):
       user_books.append(book)
 
    # Delete books from the users list of books on button click
-   if request.POST:
-      for book in user_books:
-         if str(book.id) in request.POST:
-            Books.objects.filter(id=book.id).delete()
-            break
+   if 'delete' in request.POST:
+      Books.objects.filter(id=request.POST.get('delete')).delete()
       return HttpResponseRedirect(reverse('ez_main:books_page'))
 
    return render(request, 'ez_main/books_page.html', {'user_books': user_books})
 
-@login_required
+# @login_required
 def checkout_summary(request):
    """ Return a summary of the books being ordered by the user """
    user_books = []           # List of the users books which they are trying to buy
@@ -85,9 +83,54 @@ def checkout_summary(request):
    for book in Books.objects.filter(user_id__pk=user.id):
       user_books.append(book)
 
+   if request.POST:
+      context = {'book_total': request.POST.get('total')}
+      return render(request, 'ez_main/checkout_page.html', context)
+
    return render(request, 'ez_main/checkout_summary.html', {'user_books': user_books})
 
-@login_required
+# @login_required
 def checkout_page(request):
    """ Return the page to collect purchase information from the user """
+
+   # Gather the information to send to the confirmation page
+   if request.POST:
+      context = {'fName': request.POST.get('fName'),
+         'lName': request.POST.get('lName'),
+         'dormChoice': request.POST.get('dormChoice'),
+         'roomNum': request.POST.get('roomNum'),
+         'bookTotal': request.POST.get('bookTotal')}
+      return render(request, 'ez_main/confirmation_page.html', context)
+
    return render(request, 'ez_main/checkout_page.html')
+
+# @login_required
+def confirmation_page(request):
+   """ Return the final confirmation of the users book order """
+   user = request.user
+
+   # Delete the users current books and log the user out
+   if request.POST:
+      Books.objects.filter(user_id__pk=user.id).delete()
+      return users.views.logout(request)
+   
+   return render(request, 'ez_main/confirmation_page.html')
+
+def guest_login(request):
+   """ Login page for guests only """
+   message = ""
+
+   # Try to find the id of the user being searched on
+   if request.POST:
+      print(request.POST)
+      username = request.POST.get('username')
+      obj = User_profile.objects.raw("select id from main_db.users_user_profile where username = %s limit 1", [username])
+      if obj:
+         user = obj[0]
+         print(user.id)
+      else:
+         message = "We were not able to find the user you are looking for, please try again"
+
+   context = {'error_message': message}
+
+   return render(request, 'ez_main/guest_login.html', context)

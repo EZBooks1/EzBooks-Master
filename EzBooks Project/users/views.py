@@ -23,6 +23,8 @@ def register(request):
       # Process the complete form
       form = User_profileForm(data=request.POST)
 
+   context = {'form': form}
+
    user = request.user # Get the current user, if there is one logged in
    if not user.is_authenticated:
       if form.is_valid():
@@ -41,7 +43,5 @@ def register(request):
    else:
       message = "Please log out before registering for another account."
       context = {'form': form, 'message': message}
-      return render(request, 'users/register.html', context)
-    
-   context = {'form': form}
+
    return render(request, 'users/register.html', context)

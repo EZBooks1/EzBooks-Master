@@ -55,6 +55,8 @@ function calculate_pricing()
    document.getElementById("total_price").innerHTML = "$" + priceTotal;
    document.getElementById("tax_amount").innerHTML  = "$" + fixedTaxAmount;
    document.getElementById("grand_total").innerHTML = "$" + fixedGrandTotal;
+
+   document.getElementById("total").value = fixedGrandTotal;
    return;
 
 }

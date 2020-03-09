@@ -106,7 +106,7 @@ footer
    background: rgba(44, 62, 80, 0.9);
    color: #dce5e0;
 
-   position: absolute;
+   position: relative;
    bottom: 0;
    width: 100%;
 }

@@ -16,6 +16,7 @@
    border-style: solid;
    border-color: #dce5e0;
    color: #dce5e0;
+   overflow: auto;
 }
 
 .medium
@@ -26,7 +27,7 @@
 
 .big
 {
-   width: 75%;
+   width: 78%;
    margin: 15px auto;
 }
 
@@ -90,4 +91,39 @@ select
 #credit 
 {
    text-align: center;
+}
+
+/* Styles for the checkout summary page */
+.pricing-container
+{
+   border-style: solid;
+   border-width: 2px;
+   border-color: #dce5e0;
+   margin-bottom: 25px;
+   margin-right: auto;
+   margin-left: auto;
+}
+
+.pricing-container th
+{
+   text-align: center;
+}
+
+.pricing-container td
+{
+   text-align: left;
+   padding-left: 10px;
+   padding-right: 10px;
+   padding-top: 5px;
+}
+
+.pricing-container td:last-of-type
+{
+   padding-bottom: 5px;
+}
+
+#total_price, #tax_amount, #grand_total
+{
+   text-align: right;
+   padding-left: 20px;
 }
