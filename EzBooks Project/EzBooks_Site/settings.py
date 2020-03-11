@@ -25,7 +25,8 @@ SECRET_KEY = '8dh+--*hl6nt!b!bdarw2py1r4y&^!=sr-abyd@0#4l=)5p2c*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['131173.pythonanywhere.com']
+# ALLOWED_HOSTS = ['131173.pythonanywhere.com']
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -84,15 +85,27 @@ WSGI_APPLICATION = 'EzBooks_Site.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': '131173$default',
+#         'USER': '131173',
+# 	    'PASSWORD': 'redskins1998',
+# 		'HOST':     '131173.mysql.pythonanywhere-services.com',
+
+
+# 	}
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': '131173$default',
-        'USER': '131173',
-	    'PASSWORD': 'redskins1998',
-		'HOST':     '131173.mysql.pythonanywhere-services.com',
-
-
+        'NAME': 'main_db',
+        'USER': 'admin',
+	    'PASSWORD': 'redskins3798',
+		'HOST':     'database-2.cxlya8s1760w.us-east-2.rds.amazonaws.com',
+		'PORT':     '3306',
+	
 	}
 }
 
