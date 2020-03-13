@@ -15,6 +15,7 @@ MAJORS= [
    ('Biology Education', 'Biology Education'),              
    ('Chemistry', 'Chemistry'),
    ('Computer Information Systems', 'Computer Information Systems'),
+   ('Computer Science and Spftware Engineering', 'Computer Science and Software Engineering'),
    ('Criminal Justice', 'Criminal Justice'),
    ('Cybersecurity', 'Cybersecurity'),
    ('Early Childhood Education', 'Early Childhood Education'),
