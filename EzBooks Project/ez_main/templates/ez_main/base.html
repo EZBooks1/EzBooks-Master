@@ -44,7 +44,7 @@
          <!-- Display certain navbar links only when the user is logged in -->
          {% if user.is_authenticated %}
             <li class="nav-item">
-               <p> Hello, &nbsp; {{ user.username }}.</p>
+               <p> Hello, {{ user.username }}.</p>
             </li>
             <li class="nav-item">
                <div class="dropdown">
