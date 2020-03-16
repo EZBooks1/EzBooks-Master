@@ -44,20 +44,19 @@
          <!-- Display certain navbar links only when the user is logged in -->
          {% if user.is_authenticated %}
             <li class="nav-item">
-               <p> Hello, {{ user.username }}.</p>
-            </li>
-            <li class="nav-item">
-               <div class="dropdown">
-                  <button class="btn btn-primary btn3d fas fa-user" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Personal Info</button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                     <a class="dropdown-item" href="{% url 'ez_main:class_page' %}">Your Schedule</a>
-                     <a class="dropdown-item" href="{% url 'ez_main:books_page' %}">Your Books</a>
-                  </div>
-               </div>
+               <p> Hello, &nbsp; {{ user.username }}.</p>
             </li>
             <li class="nav-item">
                <a class="main-btn btn btn-primary btn3d fas fa-sign-out-alt" href="{% url 'users:logout' %}"> Log out</a>
             </li>
+
+            <li class="nav-item">
+               <a class="main-btn btn btn-primary btn3d fas fa-calendar-alt" href="{% url 'ez_main:class_page' %}"> Your schedule</a>
+            </li>
+            <li class="nav-item">
+               <a class="main-btn btn btn-primary btn3d fas fa-book" href="{% url 'ez_main:books_page' %}"> Your books</a>
+            </li>
+
          {% else %}
             <li class="nav-item">
                <a class="main-btn btn btn-primary btn3d fas fa-sign-in-alt" href="{% url 'users:login' %}"> Login</a>
@@ -66,9 +65,6 @@
                <a class="main-btn btn btn-primary btn3d fas fa-pencil-alt" href="{% url 'users:register' %}"> Register</a>
             </li>
          {% endif %}
-            <li class="nav-item">
-               <a class="main-btn btn btn-primary btn3d fas fa-shopping-cart" id="last" href="{% url 'ez_main:checkout_summary' %}"> Shopping Cart</a>
-            </li>
          </ul>
       </div>
    </nav>
