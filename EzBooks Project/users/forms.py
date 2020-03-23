@@ -15,6 +15,7 @@ MAJORS= [
    ('Biology Education', 'Biology Education'),              
    ('Chemistry', 'Chemistry'),
    ('Computer Information Systems', 'Computer Information Systems'),
+   ('Computer Science and Software Engineering', 'Computer Science and Software Engineering'),
    ('Criminal Justice', 'Criminal Justice'),
    ('Cybersecurity', 'Cybersecurity'),
    ('Early Childhood Education', 'Early Childhood Education'),
@@ -64,7 +65,7 @@ class User_profileForm(forms.ModelForm):
 
    username  = forms.CharField(error_messages={'unique': 'This username is already taken, please choose something different.'})
    password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
-   password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
+   password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
    major     = forms.CharField(label='Major', widget=forms.Select(choices=MAJORS))
 
    class Meta:
