@@ -11,11 +11,11 @@
         Deliver to: {{dormChoice}}, Room {{roomNum}} <br />
         Amount charged: {{bookTotal}} <br />
 
-        <form method="post" action="{% url 'ez_main:confirmation_page' %}">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-primary btn3d">Okay</button>
-        </form>
-
     </div>
+
+    <form method="post" action="{% url 'ez_main:confirmation_page' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary btn3d">Okay</button>
+    </form>
 
 {% endblock content %}

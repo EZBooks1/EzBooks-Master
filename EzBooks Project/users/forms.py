@@ -64,7 +64,7 @@ class User_profileForm(forms.ModelForm):
 
    username  = forms.CharField(error_messages={'unique': 'This username is already taken, please choose something different.'})
    password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
-   password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
+   password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
    major     = forms.CharField(label='Major', widget=forms.Select(choices=MAJORS))
 
    class Meta:

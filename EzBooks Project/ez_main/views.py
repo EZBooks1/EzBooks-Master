@@ -74,20 +74,13 @@ def books_page(request):
 
    return render(request, 'ez_main/books_page.html', {'user_books': user_books})
 
+# @login_required
 def checkout_summary(request):
    """ Return a summary of the books being ordered by the user """
    user_books = []           # List of the users books which they are trying to buy
    user       = request.user # Get the currently authenticated user
-   users_id = user.id
 
-   # Check for a guest if there is no authorized user
-   if not user.is_authenticated:
-      users_id = test_login(request)
-   if users_id is None:
-      return HttpResponseRedirect(reverse('users:login'))
-
-   # Get the users books if logged in
-   for book in Books.objects.filter(user_id__pk=users_id):
+   for book in Books.objects.filter(user_id__pk=user.id):
       user_books.append(book)
 
    if request.POST:
@@ -96,15 +89,9 @@ def checkout_summary(request):
 
    return render(request, 'ez_main/checkout_summary.html', {'user_books': user_books})
 
+# @login_required
 def checkout_page(request):
    """ Return the page to collect purchase information from the user """
-   user = request.user
-
-   # Check for a guest if there is no authorized user
-   if not user.is_authenticated:
-      users_id = test_login(request)
-   if users_id is None:
-      return HttpResponseRedirect(reverse('users:login'))
 
    # Gather the information to send to the confirmation page
    if request.POST:
@@ -117,54 +104,33 @@ def checkout_page(request):
 
    return render(request, 'ez_main/checkout_page.html')
 
+# @login_required
 def confirmation_page(request):
    """ Return the final confirmation of the users book order """
    user = request.user
-   users_id = user.id
-
-   # Check for a guest if there is no authorized user
-   if not user.is_authenticated:
-      users_id = test_login(request)
-   if users_id is None:
-      return HttpResponseRedirect(reverse('users:login'))
 
    # Delete the users current books and log the user out
    if request.POST:
-      Books.objects.filter(user_id__pk=users_id).delete()
+      Books.objects.filter(user_id__pk=user.id).delete()
       return users.views.logout(request)
    
    return render(request, 'ez_main/confirmation_page.html')
 
 def guest_login(request):
    """ Login page for guests only """
-   user = request.user
    message = ""
-
-   if user.is_authenticated:
-      print("log out before logging in as a guest.")
 
    # Try to find the id of the user being searched on
    if request.POST:
+      print(request.POST)
       username = request.POST.get('username')
       obj = User_profile.objects.raw("select id from main_db.users_user_profile where username = %s limit 1", [username])
       if obj:
          user = obj[0]
-         request.session['guest_login'] = user.id
-         return HttpResponseRedirect(reverse('ez_main:checkout_summary'))
+         print(user.id)
       else:
-         message = "We were not able to find the user you are looking for, please try again."
+         message = "We were not able to find the user you are looking for, please try again"
 
    context = {'error_message': message}
 
    return render(request, 'ez_main/guest_login.html', context)
-
-def test_login(request):
-   """ Handle the events regarding guest login """
-
-   # Assign the id of the user into a session variable if a guest has logged in
-   if 'guest_login' in request.session:
-      users_id = request.session['guest_login']
-   else:
-      users_id = None
-
-   return users_id
