@@ -78,6 +78,7 @@ WSGI_APPLICATION = 'EzBooks_Site.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+# === SQL LITE DB ===
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
@@ -85,6 +86,7 @@ WSGI_APPLICATION = 'EzBooks_Site.wsgi.application'
 #     }
 # }
 
+# === PYTHON ANYWHERE DB ===
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
@@ -97,6 +99,7 @@ WSGI_APPLICATION = 'EzBooks_Site.wsgi.application'
 # 	}
 # }
 
+# === AMAZON DB ===
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',

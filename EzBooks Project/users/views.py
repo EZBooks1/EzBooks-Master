@@ -12,6 +12,7 @@ from ez_main.models import Class_schedule
 def logout(request):
    """ Log out the currently logged in user """
    auth_logout(request)
+   request.session.clear()
    return HttpResponseRedirect(reverse('ez_main:home_page'))
 
 def register(request):

@@ -24,15 +24,69 @@
                <option value="Griffith Tower">Griffith Tower</option>
                <option value="Rice Tower">Rice Tower</option>
                <option value="Young Tower">Young Tower</option>
-             </select>
+            </select>
 
             <input id="roomNum" name="roomNum" type="text" placeholder="Room Number" required>
          </div>
+
          <p>The following amount will be charged to your college account: ${{book_total}}</p>
          <input type="hidden" name="bookTotal" value="{{book_total}}">
-         <button type="submit" class="btn btn-primary btn3d">Submit Your Order</button>
-      </form>
+         <button type="submit" class="btn btn-primary btn3d" onclick="roomCheck()">Submit Your Order</button>
 
+      </form>
    </div>
+
+   <script>
+      function roomCheck()
+      {
+         var roomNum = Number(document.getElementById("roomNum").value); // Get value of room number
+         var errorMessage = "Please enter correct room number"           // Display the error message
+
+         if (isNaN(roomNum)) {
+            alert(errorMessage);
+            return false;
+         } else if (document.getElementById('dorm').value == "Ballard Hall") {
+            if (roomNum <= 1099 || roomNum >= 1500){
+               alert(errorMessage);
+               return false;
+            }   
+         } else if (document.getElementById('dorm').value == "Bradley Tower") {
+            if (roomNum <= 3099 || roomNum >= 4000){
+               alert(errorMessage);
+               return false;
+            }
+         } else if (document.getElementById('dorm').value == "Campus House") {
+            if (roomNum < 100 || roomNum >= 400){
+               alert(errorMessage);
+               return false;
+            }
+         } else if (document.getElementById('dorm').value == "Coberly Hall") {
+            if (roomNum <= 2099 || roomNum >= 2500){
+               alert(errorMessage);
+               return false;
+            }
+         } else if (document.getElementById('dorm').value == "Dixon Tower") {
+            if (roomNum <= 4099 || roomNum >= 5000){
+               alert(errorMessage);
+               return false;
+            }
+         } else if (document.getElementById('dorm').value == "Griffith Tower") {
+            if (roomNum <= 5099 || roomNum >= 6000){
+               alert(errorMessage);
+               return false;
+            }
+         } else if (document.getElementById('dorm').value == "Rice Tower") {
+            if (roomNum <= 6999 || roomNum >= 8000){
+               alert(errorMessage);
+               return false;
+            }
+         } else if (document.getElementById('dorm').value == "Young Tower") {
+            if (roomNum <= 6099 || roomNum >= 7000){
+               alert(errorMessage);
+               return false;
+            }
+         } 
+      }
+   </script>
 
 {% endblock content %}
