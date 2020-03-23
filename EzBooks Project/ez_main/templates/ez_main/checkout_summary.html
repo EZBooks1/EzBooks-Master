@@ -7,7 +7,11 @@
    <div class="modal-dialog text-center">
       <div class= "main-section">
          <div class="modal-content">
-            <h4>{{user.username}}'s Checkout Summary</h4>
+            {% if user.is_authenticated %}
+               <h4>{{user.username}}'s Checkout Summary</h4>
+            {% else %}
+               <h4>Guest's Checkout Summary</h4>
+            {% endif %}
 
             <table class="pricing-container">
                <tr>
@@ -30,6 +34,7 @@
       </div>
    </div>
 
+{% if obj in user_books %}
    <div class="modal-content big">
       <table class="table">
          <thead class="thead-dark">
@@ -79,6 +84,20 @@
       </form>
 
    </div>
+{% else %}
+<div class="modal-dialog text-center">
+   <div class= "main-section">
+      <div class="modal-content">
+         <h4>Woops!</h4>
+         {% if user.is_authenticated %}
+            <p>You need at least one book in order to checkout.</p> <br />
+         {% else %}
+            <p>At least one book is required in order to checkout.</p> <br />
+         {% endif %}
+      </div>
+   </div>
+</div>
+{% endif %}
 
 {% load static %}
    <script src="{% static 'ez_main/price_sum.js' %}"></script>
