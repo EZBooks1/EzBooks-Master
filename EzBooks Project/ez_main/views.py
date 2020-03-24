@@ -38,46 +38,31 @@ def class_page(request):
    for obj in display_classes:
       class_extensions.append(obj.class_extension)
 
-   if request.POST:
-      # Regenerate a schedule for the user on button click
-      if 'regenerate' in request.POST:
-         new_users_schedule = Class_schedule(user.id)
-         new_users_schedule.create_class(user.major)
-         new_users_schedule.save()
-         Books.objects.filter(user_id__pk=user.id).delete()
-         no_books = True
-         return HttpResponseRedirect(reverse('ez_main:class_page'))
-   
-      # Get books for the user if they have none on button click
-      if 'confirm' in request.POST:
-         for book in Books.objects.filter(user_id__pk=user.id)[:1]:
-            no_books = False
-         if no_books:
-            book = book.find_books(class_extensions, user)
-         return HttpResponseRedirect(reverse('ez_main:books_page'))
+   # Regenerate a schedule for the user on button click
+   if 'regenerate' in request.POST:
+      new_users_schedule = Class_schedule(user.id)
+      new_users_schedule.create_class(user.major)
+      new_users_schedule.save()
+      Books.objects.filter(user_id__pk=user.id).delete()
+      no_books = True
+      return HttpResponseRedirect(reverse('ez_main:class_page'))
+
+   # Get books for the user if they have none on button click
+   if 'confirm' in request.POST:
+      for book in Books.objects.filter(user_id__pk=user.id)[:1]:
+         no_books = False
+      if no_books:
+         book = book.find_books(class_extensions, user)
+      return HttpResponseRedirect(reverse('ez_main:books_page'))
 
    return render(request, 'ez_main/class_page.html', {'display_classes': display_classes})
 
-@login_required
 def books_page(request):
-   """ Return the users needed textbooks page """
-   user_books = []           # Create an empty list for the users books
-   user       = request.user # Get the currently authenticated user
-
-   for book in Books.objects.filter(user_id__pk=user.id):
-      user_books.append(book)
-
-   # Delete books from the users list of books on button click
-   if 'delete' in request.POST:
-      Books.objects.filter(id=request.POST.get('delete')).delete()
-      return HttpResponseRedirect(reverse('ez_main:books_page'))
-
-   return render(request, 'ez_main/books_page.html', {'user_books': user_books})
-
-def checkout_summary(request):
    """ Return a summary of the books being ordered by the user """
    user_books = []           # List of the users books which they are trying to buy
    user       = request.user # Get the currently authenticated user
+   class_extensions = []     # Empty list to store the class extensions
+   book = Books()            # Books object initialization
    users_id = user.id
 
    # Check for a guest if there is no authorized user
@@ -90,11 +75,28 @@ def checkout_summary(request):
    for book in Books.objects.filter(user_id__pk=users_id):
       user_books.append(book)
 
-   if request.POST:
+   # Delete books from the users list of books on button click
+   if 'delete' in request.POST:
+      Books.objects.filter(id=request.POST.get('delete')).delete()
+      return HttpResponseRedirect(reverse('ez_main:books_page'))
+   
+   # Undo the delete of all deleted books on button click (ONLY WORKS FOR AUTHENTICATED USERS CURRENTLY)
+   if 'undo_delete' in request.POST:
+      classes = Classes_list()
+      display_classes = classes.display_classes(user.class_schedule.class1, user.class_schedule.class2, user.class_schedule.class3, user.class_schedule.class4, user.class_schedule.class5, user.class_schedule.class6)
+      Books.objects.filter(user_id__pk=user.id).delete()
+      # Get the class extension for each of the users classes
+      for obj in display_classes:
+         class_extensions.append(obj.class_extension)
+      book = book.find_books(class_extensions, user)
+      return HttpResponseRedirect(reverse('ez_main:books_page'))
+
+   # Confirm the current book selection
+   if 'confirm' in request.POST:
       context = {'book_total': request.POST.get('total')}
       return render(request, 'ez_main/checkout_page.html', context)
 
-   return render(request, 'ez_main/checkout_summary.html', {'user_books': user_books})
+   return render(request, 'ez_main/books_page.html', {'user_books': user_books})
 
 def checkout_page(request):
    """ Return the page to collect purchase information from the user """
@@ -151,7 +153,7 @@ def guest_login(request):
       if obj:
          user = obj[0]
          request.session['guest_login'] = user.id
-         return HttpResponseRedirect(reverse('ez_main:checkout_summary'))
+         return HttpResponseRedirect(reverse('ez_main:books_page'))
       else:
          message = "We were not able to find the user you are looking for, please try again."
 

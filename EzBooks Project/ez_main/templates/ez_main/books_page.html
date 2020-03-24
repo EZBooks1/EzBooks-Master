@@ -4,48 +4,120 @@
 
 {% block content %}
 
-   <div class="modal-dialog text-center">
-      <div class= "main-section">
-         <div class="modal-content">
+<div class="modal-dialog text-center">
+   <div class= "main-section">
+      <div class="modal-content">
+         {% if user.is_authenticated %}
             <h4>Required Textbooks for {{user.username}}</h4>
+         {% else %}
+            <h4>Guest Book Summary</h4>
+         {% endif %}
             <p>*And other potentially overpriced, yet required products.</p>
             <br />
-         </div>
+
+         <table class="pricing-container">
+            <tr>
+               <th colspan="2">Your Totals</th>
+            </tr>
+            <tr>
+               <td>SubTotal:</td>
+               <td id="total_price"></td>
+            </tr>
+            <tr>
+               <td>Tax:</td>
+               <td id="tax_amount"></td>
+            </tr>
+            <tr>
+               <td>Total:</td>
+               <td id="grand_total"></td>
+            </tr>
+         </table>
       </div>
    </div>
-   
-   <div class="modal-content big">
+</div>
+
+{% if user_books %}
+<div class="modal-content big">
+   <form method="post" action="{% url 'ez_main:books_page' %}" class="form">
+      {% csrf_token %}
       <table class="table">
          <thead class="thead-dark">
             <tr>
                <th class="text-white bg-dark" scope="col">Textbook Name</th>
-               <th class="text-white bg-dark" scope="col">New Purchase Price</th>
-               <th class="text-white bg-dark" scope="col">Used Purchase Price</th>
-               <th class="text-white bg-dark" scope="col">New Rental Price</th>
-               <th class="text-white bg-dark" scope="col">Used Rental Price</th>
-               <th class="text-white bg-dark" scope="col"></th>
+               <th class="text-white bg-dark" scope="col">Purchase Price</th>
+               <th class="text-white bg-dark" scope="col">Rental Price</th>
+               <th class="text-white bg-dark" scope="col">Book Condition</th>
+               <th class="text-white bg-dark" scope="col">Purchase Option</th>
+               <th class="text-white bg-dark"></th>
             </tr>
          </thead>
          <tbody>
             {% for obj in user_books %}
             <tr class="table-success">
                <td>{{obj.textbook_name}}</td>
-               <td>$ {{obj.new_buy_priced}}</td>
-               <td>$ {{obj.used_buy_price}}</td>
-               <td>$ {{obj.new_rental_price}}</td>
-               <td>$ {{obj.used_rental_price}}</td>
-               <form method="post" action="{% url 'ez_main:books_page' %}">
-                  {% csrf_token %}
-                  <td><button type="submit" name="delete" class="btn btn-primary btn3d" value="{{ obj.id }}">Delete</button></td>
-               </form> 
+               <td><p class="newBuy">New: &nbsp;&nbsp; ${{obj.new_buy_priced}}</p> <p class="usedBuy">Used: &nbsp; ${{obj.used_buy_price}}</p> </td>
+               <td><p class="newRent">New: &nbsp;&nbsp; ${{obj.new_rental_price}}</p> <p class="usedRent">Used: &nbsp; ${{obj.used_rental_price}}</p> </td>
+               <td> 
+                  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                     <label class="btn btn-secondary active">
+                        <input type="radio" name="book{{ obj.id }}" class="new" autocomplete="off" checked> New
+                     </label>
+                     <label class="btn btn-secondary">
+                        <input type="radio" name="book{{ obj.id }}" class="used" autocomplete="off"> Used
+                     </label>
+                  </div>
+               </td>
+               <td>
+                  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                     <label class="btn btn-secondary active">
+                        <input type="radio" name="buy/rent{{ obj.id }}" class="buy" autocomplete="off" checked> Buy
+                     </label>
+                     <label class="btn btn-secondary">
+                        <input type="radio" name="buy/rent{{ obj.id }}" class="rent" autocomplete="off"> Rent
+                     </label>
+                  </div>
+               </td>
+               <td>
+                  <button type="submit" name="delete" class="btn btn-primary btn3d" value="{{ obj.id }}">Delete</button>
+               </td>
             </tr>
             {% endfor %}
          </tbody>
       </table>
-      <a class="btn btn-primary btn3d" href="{% url 'ez_main:checkout_summary' %}">Checkout</a>
 
+      <input type="hidden" name="total" id="total"/>
+      <button name="undo_delete" class="btn btn-primary btn3d">Undo Delete</button>
+      <button name="confirm" class="btn btn-primary btn3d">Confirm your selection</button>
+   </form>
+
+   {% if user.is_authenticated %}
       <a class="btn btn-primary btn3d" href="{% url 'ez_main:guest_login' %}">Set up guest payment</a>
+   {% endif %}
 
+</div>
+
+{% else %}
+<div class="modal-dialog text-center">
+   <div class= "main-section">
+      <div class="modal-content">
+         <h4>Woops!</h4>
+         {% if user.is_authenticated %}
+            <p>You need at least one book in order to checkout.</p> <br />
+         {% else %}
+            <p>At least one book is required in order to checkout.</p> <br />
+         {% endif %}
+
+         <form method="post" action="{% url 'ez_main:books_page' %}" class="form">
+            {% csrf_token %}
+            <button name="undo_delete" class="btn btn-primary btn3d">Undo Delete</button>
+         </form>
+
+      </div>
    </div>
+</div>
+{% endif %}
+
+{% load static %}
+   <script src="{% static 'ez_main/price_sum.js' %}"></script>
 
 {% endblock content %}
