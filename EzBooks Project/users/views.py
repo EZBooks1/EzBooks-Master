@@ -13,7 +13,7 @@ def logout(request):
    """ Log out the currently logged in user """
    auth_logout(request)
    request.session.clear()
-   return HttpResponseRedirect(reverse('ez_main:home_page'))
+   return HttpResponseRedirect(reverse('users:login'))
 
 def register(request):
    """ Register a new user """
