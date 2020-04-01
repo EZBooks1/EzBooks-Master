@@ -1,0 +1,86 @@
+{% extends "ez_main/base.html" %}
+
+<!-- Uses the modal_style.css file -->
+
+{% block content %}
+
+   <div class="modal-dialog text-center">
+      <div class= "main-section">
+         <div class="modal-content">
+            <h4>{{user.username}}'s Checkout Summary</h4>
+
+            <table class="pricing-container">
+               <tr>
+                  <th colspan="2">Your Totals</th>
+               </tr>
+               <tr>
+                  <td>SubTotal:</td>
+                  <td id="total_price"></td>
+               </tr>
+               <tr>
+                  <td>Tax:</td>
+                  <td id="tax_amount"></td>
+               </tr>
+               <tr>
+                  <td>Total:</td>
+                  <td id="grand_total"></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </div>
+
+   <div class="modal-content big">
+      <table class="table">
+         <thead class="thead-dark">
+            <tr>
+               <th class="text-white bg-dark" scope="col">Textbook Name</th>
+               <th class="text-white bg-dark" scope="col">Purchase Price</th>
+               <th class="text-white bg-dark" scope="col">Rental Price</th>
+               <th class="text-white bg-dark" scope="col">Book Condition</th>
+               <th class="text-white bg-dark" scope="col">Purchase Option</th>
+            </tr>
+         </thead>
+         <tbody>
+            {% for obj in user_books %}
+            <tr class="table-success">
+               <td>{{obj.textbook_name}}</td>
+               <td><p class="newBuy">New: &nbsp;&nbsp; ${{obj.new_buy_priced}}</p> <p class="usedBuy">Used: &nbsp; ${{obj.used_buy_price}}</p> </td>
+               <td><p class="newRent">New: &nbsp;&nbsp; ${{obj.new_rental_price}}</p> <p class="usedRent">Used: &nbsp; ${{obj.used_rental_price}}</p> </td>
+               <td> 
+                  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                     <label class="btn btn-secondary active">
+                        <input type="radio" name="book{{ obj.id }}" class="new" autocomplete="off" checked> New
+                     </label>
+                     <label class="btn btn-secondary">
+                        <input type="radio" name="book{{ obj.id }}" class="used" autocomplete="off"> Used
+                     </label>
+                  </div>
+               </td>
+               <td>
+                  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                     <label class="btn btn-secondary active">
+                        <input type="radio" name="buy/rent{{ obj.id }}" class="buy" autocomplete="off" checked> Buy
+                     </label>
+                     <label class="btn btn-secondary">
+                        <input type="radio" name="buy/rent{{ obj.id }}" class="rent" autocomplete="off"> Rent
+                     </label>
+                  </div>
+               </td>
+            </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+
+      <form method="post" action="{% url 'ez_main:checkout_summary' %}" class="form">
+         {% csrf_token %}
+            <input type="hidden" name="total" id="total"/>
+            <button name="submit" class="btn btn-primary btn3d">Confirm your selection</button>
+      </form>
+
+   </div>
+
+{% load static %}
+   <script src="{% static 'ez_main/price_sum.js' %}"></script>
+
+{% endblock content %}

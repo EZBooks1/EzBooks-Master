@@ -1,0 +1,129 @@
+@charset "utf-8";
+
+.main-section 
+{
+   margin: 0 auto;
+   margin-top: 140px;
+   padding: 0;
+}
+
+.modal-content 
+{
+   background: rgba(44, 62, 80, 0.9);
+   padding: 0 20px;
+   border-radius: 15px;
+   border: 3px;
+   border-style: solid;
+   border-color: #dce5e0;
+   color: #dce5e0;
+   overflow: auto;
+}
+
+.medium
+{
+   width: 55%;
+   margin: 15px auto;
+}
+
+.big
+{
+   width: 78%;
+   margin: 15px auto;
+}
+
+.modal-content h4 
+{
+   margin-bottom: 25px;
+   padding: 15px 0;
+   font-size: 32px;
+   text-decoration: underline;
+}
+
+.modal-link 
+{
+   color: #dce5e0;
+}
+
+.modal-link:hover
+{
+   color: #1abc9c;
+}
+
+.modal-content p 
+{
+   margin: 0px;
+}
+
+.bottom-info p:first-of-type, .bottom-info p:last-of-type 
+{
+   margin-bottom: 20px;
+}
+
+:not(:disabled):not(.disabled).btn-secondary.active, :not(:disabled):not(.disabled).btn-secondary:active, .show > .btn-secondary.dropdown-toggle
+{
+   background-color: #1abc9c;
+}
+
+/* margin for the input forms */
+input 
+{
+   margin-bottom: 10px;
+}
+
+select 
+{
+   margin-bottom: 10px;
+   width: 83%;
+}
+
+.errorlist
+{
+   list-style: none;
+   padding: 0px;
+}
+
+/* Styles for any tables */
+.table-success, .table-success > td, .table-success > th 
+{
+   background-color: #dce5e0;
+}
+
+#credit 
+{
+   text-align: center;
+}
+
+/* Styles for the checkout summary page */
+.pricing-container
+{
+   border-style: solid;
+   border-width: 2px;
+   border-color: #dce5e0;
+   margin-bottom: 25px;
+   margin-right: auto;
+   margin-left: auto;
+}
+
+.pricing-container th
+{
+   text-align: center;
+}
+
+.pricing-container td
+{
+   text-align: left;
+   padding-left: 10px;
+   padding-right: 10px;
+   padding-top: 5px;
+}
+
+.pricing-container td:last-of-type
+{
+   padding-bottom: 5px;
+}
+
+#total_price, #tax_amount, #grand_total
+{
+   text-align: right;
+   padding-left: 20px;
+}

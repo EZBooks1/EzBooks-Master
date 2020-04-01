@@ -1,0 +1,38 @@
+@charset "utf-8";
+
+.homepage-info
+{
+   background-color: rgba(44, 62, 80, 0.9);
+   border-radius: 15px;
+   border: 3px;
+   border-style: solid;
+   border-color: #dce5e0;
+   color: #dce5e0;
+   padding: 25px 30px;
+   width: 70%;
+   margin: 80px auto;
+   font-size: 18px;
+   text-align: center;
+}
+
+.homepage-info h1
+{
+   font-size: 32px;
+   text-decoration: underline;
+}
+
+.home-btn
+{
+   width: 90%;
+   margin-top: 50px;
+}
+
+.home-btn:last-of-type
+{
+   margin-bottom: 50px;
+}
+
+.home-modal
+{
+   max-width: 750px;
+}

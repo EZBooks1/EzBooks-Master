@@ -1,0 +1,38 @@
+{% extends "ez_main/base.html" %}
+
+{% block content %}
+
+   <div class="modal-content medium">
+      <h4>Checkout Information</h4>
+      <form method="post" id="checkout_form" action="{% url 'ez_main:checkout_page' %}">
+         {% csrf_token %}
+         <div>
+            <input id="fName" name="fName" type="text" placeholder="First Name" required>
+            <input id="lName" name="lName" type="text" placeholder="Last Name" required>
+         </div>
+
+         <p>Delivery Information</p> <br />
+
+         <div>
+            <label for="dorm">Choose Your Dorm:</label>
+            <select id="dorm" name="dormChoice" form="checkout_form">
+               <option value="Ballard Hall">Ballard Hall</option>
+               <option value="Bradley Tower">Bradley Tower</option>
+               <option value="Campus House">Campus House</option>
+               <option value="Coberly Hall">Coberly Hall</option>
+               <option value="Dixon Tower">Dixon Tower</option>
+               <option value="Griffith Tower">Griffith Tower</option>
+               <option value="Rice Tower">Rice Tower</option>
+               <option value="Young Tower">Young Tower</option>
+             </select>
+
+            <input id="roomNum" name="roomNum" type="text" placeholder="Room Number" required>
+         </div>
+         <p>The following amount will be charged to your college account: ${{book_total}}</p>
+         <input type="hidden" name="bookTotal" value="{{book_total}}">
+         <button type="submit" class="btn btn-primary btn3d">Submit Your Order</button>
+      </form>
+
+   </div>
+
+{% endblock content %}
