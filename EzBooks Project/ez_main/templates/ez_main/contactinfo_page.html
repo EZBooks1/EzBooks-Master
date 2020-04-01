@@ -1,0 +1,83 @@
+{% extends "ez_main/base.html" %}
+
+<!-- Uses the modal_style.css file -->
+
+{% block content %}
+
+<!-- Bootstrap modal box for the class schedule -->
+<div class="modal-dialog text-center">
+   <div class= "main-section">
+      <div class="modal-content">
+         <h4>Team EagleBooks</h4>
+         <p>Contact & Information</p>
+         <br />
+      </div>
+   </div>
+</div>
+
+<div class="modal-content smaller">
+   {% load static %}
+   <div class="center-content">
+      <ul class="list-unstyled">
+         <li>
+            <img src="{% static 'ez_main/caleb.jpg' %}" width="80" height="100" style="float:left;">
+            <div class="contact-info">
+               <p>Caleb Patterson: Team Leader</p>
+               <p>Email Address: caleb.paterson@students.pcci.edu</p>
+               <p>Hometown: Nashville, TN</p>
+               <p>Favorite Pastime: Playing a good game of chess</p>
+            </div>
+         </li>
+      </ul>
+
+      <ul class="list-unstyled">
+         <li>
+            <img src="{% static 'ez_main/josh.jpeg' %}" width="80" height="100" style="float:left;">
+            <div class="contact-info">
+               <p>Josh DeVera: Assistant Team Leader/Communication Coordinator</p>
+               <p>Email Address: joshua.devera@students.pcci.edu</p>
+               <p>Hometown: Chesapeake, VA</p>
+               <p>Favorite Pastime: Playing Video Games</p>
+            </div>
+         </li>
+      </ul>
+
+      <ul class="list-unstyled">
+         <li>
+            <img src="{% static 'ez_main/bob.jpg' %}" width="80" height="100" style="float:left;">
+            <div class="contact-info">
+               <p>Bob Ji: Database Administrator</p>
+               <p>Email Address: boning.ji@students.pcci.edu</p>
+               <p>Hometown: Shanxi, China</p>
+               <p>Favorite Pastime: Playing basketball</p>
+            </div>
+         </li>
+      </ul>
+
+      <ul class="list-unstyled">
+         <li>
+            <img src="{% static 'ez_main/eric.png' %}" width="80" height="100" style="float:left;">
+            <div class="contact-info">
+               <p>Eric Cherubin: Quality Assurance</p>
+               <p>Email Address: eric.cherubin@students.pcci.edu</p>
+               <p>Hometown: Quincy, FL</p>
+               <p>Favorite Pastime: Playing Video Games</p>
+            </div>
+         </li>
+      </ul>
+
+      <ul class="list-unstyled">
+         <li>
+            <img src="{% static 'ez_main/zach.jpg' %}" width="80" height="100" style="float:left;">
+            <div class="contact-info">
+               <p>Zachary Carrier: User Interface/User Experience</p>
+               <p>Email Address: zachary.carrier@students.pcci.edu</p>
+               <p>Hometown: London, ON, Canada</p>
+               <p>Favorite Pastime: Woodwork</p>
+            </div>
+         </li>
+      </ul>
+   </div>
+</div>
+
+{% endblock content %}

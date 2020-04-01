@@ -17,6 +17,10 @@ def about_page(request):
    """ Return the about page for ez_main """
    return render(request, 'ez_main/about_page.html')
 
+def contactinfo_page(request):
+   """ Return the contact info page """
+   return render(request, 'ez_main/contactinfo_page.html')
+
 @login_required
 def class_page(request):
    """ Return the users class schedule page """

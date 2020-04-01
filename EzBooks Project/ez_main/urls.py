@@ -29,4 +29,7 @@ urlpatterns = [
 
    # Guest login page
    path('guests/', views.guest_login, name="guest_login"),
+
+   # Contact Info & Help page path
+   path('contactinfo/', views.contactinfo_page, name="contactinfo_page"),
 ]

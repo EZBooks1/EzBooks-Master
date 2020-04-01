@@ -19,6 +19,12 @@
    overflow: auto;
 }
 
+.smaller
+{
+   width: 40%;
+   margin: 15px auto;
+}
+
 .medium
 {
    width: 55%;
@@ -92,6 +98,18 @@ select
 #credit 
 {
    text-align: center;
+}
+
+/* Contact information page styles */
+.center-content
+{
+   padding:30px;
+   margin: 0px auto;
+}
+
+.contact-info
+{
+   padding-left: 95px;
 }
 
 /* Styles for the checkout summary page */
