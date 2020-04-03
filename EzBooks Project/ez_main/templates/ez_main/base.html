@@ -6,6 +6,8 @@
       <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
       <title>EagleBooks</title>
+      
+      <link href = "../../static/ez_main/EagleBooks_logo.ico" rel="shortcut icon" />
 
       <!-- Bootstrap CSS stylesheet -->
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
@@ -44,7 +46,7 @@
          <!-- Display certain navbar links only when the user is logged in -->
          {% if user.is_authenticated %}
             <li class="nav-item">
-               <p> Hello, &nbsp; {{ user.username }}.</p>
+               <p> Hello, {{ user.username }}.</p>
             </li>
             <li class="nav-item">
                <a class="main-btn btn btn-primary btn3d fas fa-sign-out-alt" href="{% url 'users:logout' %}"> Log out</a>
