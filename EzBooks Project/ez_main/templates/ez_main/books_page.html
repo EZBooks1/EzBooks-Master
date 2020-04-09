@@ -78,7 +78,9 @@
                   </div>
                </td>
                <td>
-                  <button type="submit" name="delete" class="btn btn-primary btn3d" value="{{ obj.id }}">Delete</button>
+               {% if user.is_authenticated %}  
+						<button type="submit" name="delete" class="btn btn-primary btn3d" value="{{ obj.id }}">Delete</button>
+					{% endif %}
                </td>
             </tr>
             {% endfor %}
@@ -86,8 +88,10 @@
       </table>
 
       <input type="hidden" name="total" id="total"/>
-      <button name="undo_delete" class="btn btn-primary btn3d">Undo Delete</button>
-      <button name="confirm" class="btn btn-primary btn3d">Confirm your selection</button>
+      {% if user.is_authenticated %}
+			<button name="undo_delete" class="btn btn-primary btn3d">Undo Delete</button>
+      {% endif %}
+		<button name="confirm" class="btn btn-primary btn3d">Confirm your selection</button>
    </form>
 
    {% if user.is_authenticated %}
