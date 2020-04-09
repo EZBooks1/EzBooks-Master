@@ -114,11 +114,21 @@ def checkout_page(request):
 
    # Gather the information to send to the confirmation page
    if request.POST:
-      context = {'fName': request.POST.get('fName'),
-         'lName': request.POST.get('lName'),
-         'dormChoice': request.POST.get('dormChoice'),
-         'roomNum': request.POST.get('roomNum'),
-         'bookTotal': request.POST.get('bookTotal')}
+      if request.POST.get('delivery_method') == "deliver":
+         delivery_info = "Deliver to " + request.POST.get('dormChoice') + ", Room: " + request.POST.get('roomNum')
+
+         context = {'fName': request.POST.get('fName'),
+            'lName': request.POST.get('lName'),
+            'delivery_info': delivery_info,
+            'bookTotal': request.POST.get('bookTotal')}
+      else:
+         delivery_info = "Pickup order at MacKenzie Great Hall"
+
+         context = {'fName': request.POST.get('fName'),
+            'lName': request.POST.get('lName'),
+            'delivery_info': delivery_info,
+            'bookTotal': request.POST.get('bookTotal')}
+
       return render(request, 'ez_main/confirmation_page.html', context)
 
    return render(request, 'ez_main/checkout_page.html')
@@ -145,10 +155,6 @@ def guest_login(request):
    """ Login page for guests only """
    user = request.user
    message = ""
-
-   # NOT FINISHED YET
-   if user.is_authenticated:
-      print("log out before logging in as a guest.")
 
    # Try to find the id of the user being searched on
    if request.POST:

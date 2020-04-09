@@ -4,6 +4,7 @@
 
 {% block content %}
 
+{% if user_books %}
 <div class="modal-dialog text-center">
    <div class= "main-section">
       <div class="modal-content">
@@ -36,7 +37,6 @@
    </div>
 </div>
 
-{% if user_books %}
 <div class="modal-content big">
    <form method="post" action="{% url 'ez_main:books_page' %}" class="form">
       {% csrf_token %}
@@ -78,15 +78,19 @@
                   </div>
                </td>
                <td>
-                  <button type="submit" name="delete" class="btn btn-primary btn3d" value="{{ obj.id }}">Delete</button>
+                  {% if user.is_authenticated %}
+                     <button type="submit" name="delete" class="btn btn-primary btn3d" value="{{ obj.id }}">Delete</button>
+                  {% endif %}
                </td>
             </tr>
             {% endfor %}
          </tbody>
       </table>
 
-      <input type="hidden" name="total" id="total"/>
-      <button name="undo_delete" class="btn btn-primary btn3d">Undo Delete</button>
+      <input type="hidden" name="total" id="total">
+      {% if user.is_authenticated %}
+         <button name="undo_delete" class="btn btn-primary btn3d">Undo deleted books</button>
+      {% endif %}
       <button name="confirm" class="btn btn-primary btn3d">Confirm your selection</button>
    </form>
 
@@ -103,15 +107,16 @@
          <h4>Woops!</h4>
          {% if user.is_authenticated %}
             <p>You need at least one book in order to checkout.</p> <br />
+
+            <form method="post" action="{% url 'ez_main:books_page' %}" class="form">
+               {% csrf_token %}
+               <button name="undo_delete" class="btn btn-primary btn3d">Undo Delete</button>
+            </form>
          {% else %}
-            <p>At least one book is required in order to checkout.</p> <br />
+            <p>The user you are buying books for has not confirmed any books to order just yet.</p> <br />
+            <p>Please try again later.</p> <br />
+            <a class="btn btn-primary btn3d" href="{% url 'ez_main:home_page' %}">Okay</a>
          {% endif %}
-
-         <form method="post" action="{% url 'ez_main:books_page' %}" class="form">
-            {% csrf_token %}
-            <button name="undo_delete" class="btn btn-primary btn3d">Undo Delete</button>
-         </form>
-
       </div>
    </div>
 </div>

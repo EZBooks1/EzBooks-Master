@@ -8,8 +8,8 @@
     <p>Here are your order details</p>
 
     Order for: {{fName}} {{lName}} <br />
-    Deliver to: {{dormChoice}}, Room {{roomNum}} <br />
-    Amount charged: {{bookTotal}} <br />
+    Delivery Method: {{delivery_info}} <br />
+    Amount charged: ${{bookTotal}} <br />
 
     <form method="post" action="{% url 'ez_main:confirmation_page' %}">
         {% csrf_token %}
