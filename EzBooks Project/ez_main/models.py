@@ -92,6 +92,8 @@ class Books(models.Model):
       for extension in extensions:
          for obj in Book_list.objects.raw("select id from main_db.ez_main_book_list where course = %s", [extension]):
             all_books.append(obj.textbook)
+   
+      all_books.sort()
 
       # Remove any duplicate textbooks
       for book in all_books:
@@ -104,7 +106,7 @@ class Books(models.Model):
          seed(datetime.now())
          price = randint(50,350)
                   
-         # Assign a price of zero to all the classes which do not require a textbook
+         # Remove the no text required entries and assign prices to the books
          if book == 'NO TEXT REQUIRED':
             all_books.remove(book)
          else:
